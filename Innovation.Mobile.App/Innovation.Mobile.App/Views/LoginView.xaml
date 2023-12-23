@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Innovation.Mobile.App.Views.LoginView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+    xmlns:controls="clr-namespace:Innovation.Mobile.App.Controls;assembly=Innovation.Mobile.App"
+    xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors"
+    xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+    utility:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="411" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <AbsoluteLayout
+            Grid.Row="1"
+            Grid.Column="1"
+            HeightRequest="800"
+            HorizontalOptions="FillAndExpand"
+            WidthRequest="300">
+            <Frame
+                Margin="0,1,0,1"
+                AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                AbsoluteLayout.LayoutFlags="SizeProportional"
+                BackgroundColor="White"
+                CornerRadius="10"
+                HasShadow="true">
+                <StackLayout Margin="0,20" Padding="0,1">
+                    <StackLayout
+                        HorizontalOptions="Center"
+                        Orientation="Vertical"
+                        VerticalOptions="EndAndExpand">
+                        <BoxView HeightRequest="10" />
+                        <Label
+                            FontSize="Large"
+                            Text="Login"
+                            TextColor="Black" />
+                        <BoxView HeightRequest="10" />
+                        <dxe:TextEdit
+                            IsTabStop="True"
+                            Keyboard="Text"
+                            LabelText="Username"
+                            ReturnType="Next"
+                            Style="{StaticResource InputPrimary}"
+                            Text="{Binding UserName, Mode=TwoWay}" />
+                        <BoxView HeightRequest="2" />
+                        <dxe:PasswordEdit
+                            IsTabStop="True"
+                            Keyboard="Text"
+                            LabelText="Password"
+                            ReturnType="Next"
+                            Style="{StaticResource InputPrimary}"
+                            Text="{Binding Password, Mode=TwoWay}" />
+                        <BoxView HeightRequest="10" />
+                        <Button
+                            Command="{Binding LoginCommand}"
+                            IsEnabled="{Binding LockLogin}"
+                            Style="{StaticResource ButtonInnovationPrimary}"
+                            Text="Sign in" />
+                    </StackLayout>
+                    <StackLayout
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal"
+                        VerticalOptions="EndAndExpand">
+                        <Label FontSize="Small" Text="Version : " />
+                        <Label FontSize="Small" Text="{Binding VersionName}" />
+                    </StackLayout>
+                    <Button
+                        Command="{Binding UpdateCommand}"
+                        IsVisible="{Binding IsUpdate}"
+                        Text="Update Version" />
+                </StackLayout>
+
+            </Frame>
+
+            <Frame
+                Padding="0,0,0,0"
+                AbsoluteLayout.LayoutBounds="0.5,0.05,55,55"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                BackgroundColor="Transparent"
+                BorderColor="Transparent"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="End">
+                <Image
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Source="inno1.gif"
+                    VerticalOptions="Start" />
+            </Frame>
+        </AbsoluteLayout>
+    </Grid>
+
+
+
+
+
+</ContentPage>
+

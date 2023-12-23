@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Innovation.Mobile.App.Views.Widget.View.DialogSiteAndPrinter"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors"
+    BackgroundColor="#20000000">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame
+                CornerRadius="10"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="250">
+                <StackLayout>
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="กรุณาเลือก Site และ Printer"
+                        VerticalOptions="Center" />
+                    <dxe:ComboBoxEdit
+                        DisplayMember="Site_Name"
+                        ItemsSource="{Binding LstSiteProfile}"
+                        LabelText="Site"
+                        SelectedItem="{Binding SiteProfile}"
+                        SelectionChangedCommand="{Binding SelectSiteCommand}"
+                        Style="{StaticResource InputPrimary}"
+                        ValueMember="Site_ID">
+                        <dxe:ComboBoxEdit.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="*">
+                                    <Label
+                                        Grid.Column="0"
+                                        Padding="10"
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding Site_Name}" />
+                                </Grid>
+                            </DataTemplate>
+                        </dxe:ComboBoxEdit.ItemTemplate>
+                    </dxe:ComboBoxEdit>
+                    <dxe:ComboBoxEdit
+                        DisplayMember="Printer_Name"
+                        ItemsSource="{Binding LstPrinterProfile}"
+                        LabelText="Printer"
+                        SelectedIndex="-1"
+                        SelectedItem="{Binding PrinterProfile}"
+                        Style="{StaticResource InputPrimary}"
+                        ValueMember="ID">
+                        <dxe:ComboBoxEdit.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="*">
+                                    <Label
+                                        Grid.Column="0"
+                                        Padding="10"
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding Printer_Name}" />
+                                </Grid>
+                            </DataTemplate>
+                        </dxe:ComboBoxEdit.ItemTemplate>
+                    </dxe:ComboBoxEdit>
+                    <Button
+                        Command="{Binding GetSiteAndPrinterCommand}"
+                        IsEnabled="{Binding IsCommit}"
+                        Style="{StaticResource ButtonInnovationPrimary}"
+                        Text="บันทึก" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Innovation.Mobile.App.Views.HomeView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+    xmlns:templates="clr-namespace:Innovation.Mobile.App.Templates"
+    xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+    x:Name="HomeViewPage"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="White">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding SelectSite}"
+            IconImageSource="site.png"
+            Order="Primary"
+            Priority="0"
+            Text="ออกจากระบบ" />
+        <ToolbarItem
+            Command="{Binding LogoutCommand}"
+            IconImageSource="logout.png"
+            Order="Primary"
+            Priority="1"
+            Text="ออกจากระบบ" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+            <StackLayout HorizontalOptions="Center">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="25"
+                    Style="{StaticResource SizeLabel}"
+                    Text="Innovation MRP" />
+            </StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ListView
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,10,0"
+                    HasUnevenRows="true"
+                    ItemsSource="{Binding MenuHomeItems}"
+                    SelectionMode="None"
+                    SeparatorColor="Transparent"
+                    VerticalScrollBarVisibility="Never">
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior Command="{Binding MenuItemTappedCommand}" EventName="ItemTapped" />
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame
+                                    Margin="10"
+                                    BackgroundColor="#F6F6F6"
+                                    BorderColor="Gray"
+                                    CornerRadius="15">
+                                    <Grid HorizontalOptions="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Grid.Column="0"
+                                            HeightRequest="30"
+                                            Source="{Binding MenuIcon}"
+                                            HorizontalOptions="EndAndExpand"
+                                            VerticalOptions="Center"
+                                            WidthRequest="30" />
+                                        <Label
+                                            Grid.Column="1"
+                                            Text="{Binding MenuText}"
+                                            HorizontalOptions="StartAndExpand"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--<ScrollView Grid.Row="0" Grid.Column="1">
+                    <StackLayout
+                        Padding="10,10"
+                        BackgroundColor="White"
+                        HorizontalOptions="Center"
+                        Orientation="Vertical"
+                        VerticalOptions="CenterAndExpand">
+                        <Frame
+                            Padding="10,10"
+                            BackgroundColor="#F6F6F6"
+                            CornerRadius="5"
+                            HeightRequest="40"
+                            WidthRequest="100">
+                            <StackLayout>
+                                <Image
+                                    HeightRequest="30"
+                                    Source="{Binding MenuIcon}"
+                                    VerticalOptions="Center"
+                                    WidthRequest="30" />
+                                <Label Text="{Binding MenuText}" VerticalOptions="Center" />
+                            </StackLayout>
+                        </Frame>
+
+
+                -->
+                <!--<ListView
+                        HasUnevenRows="False"
+                        ItemsSource="{Binding MenuHomeItems}"
+                        SeparatorVisibility="None">
+                        <ListView.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding MenuItemTappedCommand}" EventName="ItemTapped" />
+                        </ListView.Behaviors>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell Height="700">
+                                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                        <Frame
+                                            BackgroundColor="Red"
+                                            CornerRadius="10"
+                                            HeightRequest="100"
+                                            WidthRequest="100" />
+                                        <Label Text="Test" />
+                                    </StackLayout>
+                -->
+                <!--<ContentView VerticalOptions="CenterAndExpand">
+                                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Frame
+                                                BackgroundColor="Red"
+                                                CornerRadius="10"
+                                                HeightRequest="200"
+                                                WidthRequest="200" />
+                                        </StackLayout>
+                -->
+                <!--<Grid
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Margin="0,2,0,2"
+                                                Padding="10,10,0,10"
+                                                BackgroundColor="Red"
+                                                ColumnSpacing="12"
+                                                HeightRequest="500"
+                                                WidthRequest="200">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                -->
+                <!--<Image
+                                                    Grid.Column="1"
+                                                    HeightRequest="30"
+                                                    Source="{Binding MenuIcon}"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="30" />
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Text="{Binding MenuText}"
+                                                    VerticalOptions="Center" />-->
+                <!--
+                                            </Grid>-->
+                <!--
+                                    </ContentView>-->
+                <!--
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>-->
+                <!--
+
+                    </StackLayout>
+                </ScrollView>-->
+            </Grid>
+        </StackLayout>
+
+    </ContentPage.Content>
+
+</ContentPage>

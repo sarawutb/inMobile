@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Views.QualityCheckListDtlBarcodeView"
+             xmlns:controls="clr-namespace:Innovation.Mobile.App.Controls;assembly=Innovation.Mobile.App"
+             xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+             xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             Title="Barcode Detail">
+    <StackLayout Orientation="Vertical">
+        <ScrollView  HeightRequest="300">
+            <Grid Padding="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" FontSize="Medium" Text="RM Name :"/>
+                <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" FontSize="Medium" Text="{Binding selectReceiveDtl.rmName}"/>
+                <!--<StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="0">
+                    <Label VerticalOptions="Center" FontSize="Medium" Text="{Binding selectReceiveDtl.barcode}"/>
+                    <Label VerticalOptions="Center" FontSize="Medium" Text="{Binding selectBarcode.batchNo}"  IsVisible="{Binding IshideBatch}"/>
+                </StackLayout>-->
+                <Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="WeightPerUnit :"/>
+                <Label Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Text="{Binding selectReceiveDtl.weightPerUnit}"/>
+                <Label Grid.Row="2" Grid.Column="0" VerticalOptions="Center" Text="QTY :"/>
+                <Label Grid.Row="2" Grid.Column="1" VerticalOptions="Center" Text="{Binding CountQTY}"/>
+                <Label Grid.Row="3" Grid.Column="0" VerticalOptions="Center" Text="Lot No. :"/>
+                <Label Grid.Row="3" Grid.Column="1" VerticalOptions="Center" Text="{Binding selectReceiveDtl.lotNo}"/>
+                <Label Grid.Row="4" Grid.Column="0" VerticalOptions="Center" Text="Expire Date :"/>
+                <Label Grid.Row="4" Grid.Column="1" VerticalOptions="Center" Text="{Binding ExpireDateLot}"/>
+                <Label Grid.Row="5" Grid.Column="0" VerticalOptions="Center" Text="Receive Status :"/>
+                <Label Grid.Row="5" Grid.Column="1" VerticalOptions="Center" Text="{Binding StatusBarcode}"/>
+            </Grid>
+        </ScrollView>
+        <StackLayout HeightRequest="200">
+            <Label Text="WH Check" BackgroundColor="Gray" FontSize="Medium"/>
+            <ListView x:Name="ReferencesNew" ItemsSource="{Binding PlanWHCheck}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                                <Label Text="{Binding Barcode}"></Label>
+                                <Label Text="{Binding CheckListName, StringFormat='  ปัญหา: {0:N}'}"></Label>
+                                <Label Text="{Binding Description, StringFormat='  รายละเอียด: {0:N}'}"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                        <!--<TextCell Text="{Binding Barcode}" Detail="{Binding CheckListName }"></TextCell>-->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <StackLayout >
+            <Label Text="QA Check" BackgroundColor="Gray" FontSize="Medium"/>
+            <ScrollView >
+                <StackLayout  HeightRequest="200">
+                    <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical">
+                        <ListView
+                    VerticalOptions="FillAndExpand"
+                    HasUnevenRows="true"
+                    CachingStrategy="RecycleElement"
+                    ItemsSource="{Binding CheckQaList}">
+                            <ListView.Header>
+                                <Grid Padding="3" VerticalOptions="Center" BackgroundColor="WhiteSmoke">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="9*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0"
+                              FontSize="Medium" Text="เช็ค" />
+                                    <Label Grid.Row="0" Grid.Column="1"
+                              FontSize="Medium" Text="หัวข้อ" />
+                                </Grid>
+                            </ListView.Header>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid BackgroundColor="White" Padding="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="9*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <CheckBox Grid.Column="0" IsChecked="{Binding IsCheck}" IsEnabled="{Binding IsLockCheck}"></CheckBox>
+                                            <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                                <Label  Text="{Binding Name_TH}" VerticalOptions="Center"></Label>
+                                            </StackLayout>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button Text="รับ RM" Command="{Binding SendDataYesCommand}" IsEnabled="{Binding LockBtn}"></Button>
+            <Button Text="ไม่รับ RM" Command="{Binding SendDataNoCommand}" IsEnabled="{Binding LockBtn}"></Button>
+            <Button Text="ส่ง WH เช็คอีกรอบ" Command="{Binding ShowRemarkCommand}" IsEnabled="{Binding LockRecheck}"></Button>
+            <Button Text="ยกเลิกตรวจสอบ" Command="{Binding CancelQualityCheckCommand}" IsVisible="{Binding IsCancelQualityCheckBtnVisible}"></Button>
+        </StackLayout>
+        <StackLayout IsVisible="{Binding ShowRemark}" Orientation="Vertical" VerticalOptions="Fill" Padding="2">
+            <Label Text="กรุณาเลือกเหตุผล" HorizontalOptions="StartAndExpand" FontSize="Medium"></Label>
+            <Picker Title="กรุณาเลือก"   ItemsSource="{Binding Recheck}"  SelectedItem="{Binding SelectRecheck,Mode=TwoWay}"  ItemDisplayBinding="{Binding Name_TH}"  x:Uid="{Binding ID}"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                <Button Text="ส่ง" Command="{Binding SendReCheckCommand}"></Button>
+                <Button Text="ยกเลิก" Command="{Binding HideRemarkCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

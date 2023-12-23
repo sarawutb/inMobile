@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Templates.QAViewTemplate">
+    <ContentView.Content>
+        <Frame IsClippedToBounds="True"  
+           HasShadow="True"  
+           Padding="0"  
+           BackgroundColor="{Binding LabelColor, Converter={StaticResource LocalLabelColorConverter}}" >
+            <Frame.OutlineColor>
+                <OnPlatform x:TypeArguments="Color"  
+                    Android="Gray"  
+                    iOS="Gray"/>
+            </Frame.OutlineColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness"  
+                     Android="10"   
+                     iOS="10"/>
+            </Frame.Margin>
+            <StackLayout Orientation="Horizontal">
+                <BoxView Color="{Binding IsCheck, Converter={StaticResource LocalCardViewConverter}}" WidthRequest="7"/>
+                <Grid VerticalOptions="CenterAndExpand"  
+                     Padding="0"  
+                     HorizontalOptions="FillAndExpand"  
+                     BackgroundColor="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="6*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <!--0-->
+                        <RowDefinition Height="Auto"/>
+                        <!--1-->
+                        <RowDefinition Height="*"/>
+                        <!--2-->
+                        <RowDefinition Height="*"/>
+                        <!--3-->
+                        <RowDefinition Height="Auto"/>
+                        <!--4-->
+                        <RowDefinition Height="*"/>
+                        <!--5-->
+                        <RowDefinition Height="Auto"/>
+                        <!--6-->
+                        <RowDefinition Height="*"/>
+                        <!--7-->
+                        <RowDefinition Height="Auto"/>
+                        <!--8-->
+                        <RowDefinition Height="*"/>
+                        <!--9-->
+                        <RowDefinition Height="Auto"/>
+                        <!--10-->
+                        <RowDefinition Height="*"/>
+                        <!--11-->
+                        <RowDefinition Height="Auto"/>
+                        <!--12-->
+                        <RowDefinition Height="*"/>
+                        <!--13-->
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0"
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center"  
+                       Text="วันที่รับเข้าครั้งแรก">
+                    </Label>
+                    <Label Grid.Row="0" Grid.Column="1"
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                       Text="{Binding firstReceiveDate}">
+                    </Label>
+                    <!--0-->
+                    <Label Grid.Row="2" Grid.Column="0" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="Rm ID."/>
+                    <Label Grid.Row="2" Grid.Column="1" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="{Binding rmId}"/>
+                    <!--2-->
+                    <Label Grid.Row="3" Grid.Column="0" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="Rm ID Receive."/>
+                    <Label Grid.Row="3" Grid.Column="1" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="{Binding rmIdRecieve}"/>
+                    <!--3-->
+                    <Label Grid.Row="5" Grid.Column="0" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="Rm Name."/>
+                    <Label Grid.Row="5" Grid.Column="1" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="{Binding rmName}"/>
+                    <!--5-->
+                    <Label Grid.Row="7" Grid.Column="0" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="Lot No."/>
+                    <Label Grid.Row="7" Grid.Column="1" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="{Binding LotNo_Group}"/>
+                    <!--7-->
+                    <Label Grid.Row="13" Grid.Column="0" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="จำนวน"/>
+                    <Label Grid.Row="13" Grid.Column="1" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="{Binding countQty}"/>
+                    <Label Grid.Row="9" Grid.Column="0" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="หน่วย/หน่วยบรรจุ"/>
+                    <Label Grid.Row="9" Grid.Column="1" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="{Binding weightPerUnit}"/>
+                    <Label Grid.Row="11" Grid.Column="0" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="น้ำหนัก Lot"/>
+                    <Label Grid.Row="11" Grid.Column="1" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="{Binding SumWeight}"/>
+                    
+                    <BoxView Grid.Row="1" Grid.ColumnSpan="2"  Color="Gray"  
+                        HorizontalOptions="FillAndExpand"  
+                        HeightRequest="1"/>
+                    <BoxView Grid.Row="4" Grid.ColumnSpan="2" Color="Gray"  
+                        HorizontalOptions="FillAndExpand"  
+                        HeightRequest="1"/>
+                    <BoxView Grid.Row="10" Grid.ColumnSpan="2" Color="Gray"  
+                        HorizontalOptions="FillAndExpand"  
+                        HeightRequest="1"/>
+                    <BoxView Grid.Row="12" Grid.ColumnSpan="2" Color="Gray"  
+                        HorizontalOptions="FillAndExpand"  
+                        HeightRequest="1"/>
+                    <BoxView Grid.Row="6" Grid.ColumnSpan="2" Color="Gray"  
+                        HorizontalOptions="FillAndExpand"  
+                        HeightRequest="1"/>
+                    <BoxView Grid.Row="8" Grid.ColumnSpan="2" Color="Gray"  
+                        HorizontalOptions="FillAndExpand"  
+                        HeightRequest="1"/>
+                </Grid>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

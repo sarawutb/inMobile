@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Views.ExternalReceivingView"
+             xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+             xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             Title="{Binding RMTitle}"
+             >
+    <StackLayout>
+        <ListView 
+                  ItemsSource="{Binding lstReceiveDtl}" CachingStrategy="RecycleElement"
+                  SeparatorVisibility="Default" HasUnevenRows="True">
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior 
+                    EventName="ItemTapped" 
+                    Command="{Binding RMTappedCommand}" 
+                    EventArgsConverter="{StaticResource LocalItemTappedConverter}" >
+                </behaviors:EventToCommandBehavior>
+            </ListView.Behaviors>
+            <ListView.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="4*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0"
+                               Style="{StaticResource ListViewHeaderStyle}"
+                               Text="RM Code" />
+                    <Label Grid.Row="0" Grid.Column="1"
+                               Style="{StaticResource ListViewHeaderStyle}"
+                               Text="Qty" />
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid BackgroundColor="{Binding ColorStatusCode ,Converter={StaticResource LocalLabelColorConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6*" />
+                                <ColumnDefinition Width="4*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                <Label FontSize="Medium" Text="{Binding rmId}" />
+                                <Label FontSize="Medium" Text="{Binding rmName}" />                                
+                            </StackLayout>
+                            <Label Grid.Column="1" 
+                                   FontSize="Medium"
+                                   Text="{Binding receivingWeight}" ></Label>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

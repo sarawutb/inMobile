@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage
+    x:Class="Innovation.Mobile.App.Views.MainView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+    xmlns:views="clr-namespace:Innovation.Mobile.App.Views"
+    Title="Innovation Mobile App"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    MasterBehavior="Popover">
+    <MasterDetailPage.Master>
+        <views:MenuView BindingContext="{Binding MenuViewModel}" />
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <ContentPage />
+    </MasterDetailPage.Detail>
+</MasterDetailPage>

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="Innovation.Mobile.App.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Innovation.Mobile.App.Controls;assembly=Innovation.Mobile.App"
+    xmlns:converters="clr-namespace:Innovation.Mobile.App.Converters;assembly=Innovation.Mobile.App"
+    xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors">
+    <Application.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="LargeFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="20" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="18" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="MediumFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="18" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="16" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="SmallFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="14" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="14" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="XSmallFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="11" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="9" />
+            </OnPlatform>
+
+            <Color x:Key="BethanyPurple">#a594c1</Color>
+            <Color x:Key="HeaderGrey">#aaaaaa</Color>
+            <Color x:Key="PlainGrey">#aaaaaa</Color>
+            <Color x:Key="LightGrey">#cccccc</Color>
+            <Color x:Key="EntryGrey">Gray</Color>
+            <Color x:Key="LightForeground">White</Color>
+
+            <Color x:Key="InnovationPrimary">#603813</Color>
+            <Color x:Key="InnovationPrimaryDark">#603000</Color>
+            <Color x:Key="Primary">#0081FF</Color>
+            <Color x:Key="Info">#01A2B9</Color>
+            <Color x:Key="Success">#1BA345</Color>
+            <Color x:Key="Warning">#FEC001</Color>
+            <Color x:Key="Danger">#DE3E44</Color>
+            <Color x:Key="Secondary">#6B757D</Color>
+            <Color x:Key="Light">#F8FAFB</Color>
+            <Color x:Key="White">#FFFFFF</Color>
+            <Color x:Key="Transparent">#80000000</Color>
+
+            <Style x:Key="SizeLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="17" />
+            </Style>
+
+            <Style x:Key="SizeContent" TargetType="Label">
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+
+            <Style x:Key="InputPrimary" TargetType="dxe:TextEdit">
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="TextFontFamily" Value="Kanit" />
+                <Setter Property="AffixFontFamily" Value="Kanit" />
+                <Setter Property="BorderColor" Value="{StaticResource InnovationPrimary}" />
+                <Setter Property="FocusedBorderColor" Value="{StaticResource Primary}" />
+            </Style>
+
+            <Style x:Key="ButtonPrimary" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="Kanit" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="ButtonInnovationPrimary" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="Kanit" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="BackgroundColor" Value="{StaticResource InnovationPrimary}" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource InnovationPrimary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="ListViewHeaderStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="{StaticResource MediumFontSize}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="{StaticResource HeaderGrey}" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            </Style>
+
+            <Style x:Key="RoundedEntryStyle" TargetType="{x:Type controls:RoundedEntry}">
+                <Setter Property="CornerRadius" Value="3" />
+                <Setter Property="IsCurvedCornersEnabled" Value="True" />
+                <Setter Property="BorderColor" Value="{StaticResource LightGrey}" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="HeightRequest" Value="35" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource PlainGrey}" />
+                <Setter Property="TextColor" Value="{StaticResource EntryGrey}" />
+            </Style>
+            <Style x:Key="RoundedPickerStyle" TargetType="{x:Type controls:RoundedEntry}">
+                <Setter Property="CornerRadius" Value="3" />
+                <Setter Property="IsCurvedCornersEnabled" Value="True" />
+                <Setter Property="BorderColor" Value="{StaticResource LightGrey}" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="HeightRequest" Value="35" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource PlainGrey}" />
+                <Setter Property="TextColor" Value="{StaticResource EntryGrey}" />
+            </Style>
+
+            <Style x:Key="MenuLabelStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSize}" />
+                <Setter Property="TextColor" Value="{StaticResource HeaderGrey}" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#E4503A" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
+
+            <converters:UnfocusedConverter x:Key="LocalUnfocusedConverter" />
+            <converters:MenuIconConverter x:Key="LocalMenuIconConverter" />
+            <converters:ItemTappedConverter x:Key="LocalItemTappedConverter" />
+            <converters:CardViewConverter x:Key="LocalCardViewConverter" />
+            <converters:LabelColorConverter x:Key="LocalLabelColorConverter" />
+            <converters:ToggledConverter x:Key="LocalToggledConverter" />
+            <converters:TextAmountConverter x:Key="LocalTextAmountConverter" />
+            <converters:ButtonConverter x:Key="LocalButtonConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

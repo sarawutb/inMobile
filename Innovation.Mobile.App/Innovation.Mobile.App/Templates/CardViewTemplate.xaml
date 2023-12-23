@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Templates.CardViewTemplate">
+    <ContentView.Content>
+        <Frame IsClippedToBounds="True"  
+           HasShadow="True"  
+           Padding="0"  
+           BackgroundColor="{Binding LabelColor, Converter={StaticResource LocalLabelColorConverter}}" >
+            <Frame.OutlineColor>
+                <OnPlatform x:TypeArguments="Color"  
+                    Android="Gray"  
+                    iOS="Gray"/>
+            </Frame.OutlineColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness"  
+                     Android="10"   
+                     iOS="10"/>
+            </Frame.Margin>
+            <StackLayout Orientation="Horizontal">
+                <BoxView Color="{Binding IsCheck, Converter={StaticResource LocalCardViewConverter}}" WidthRequest="6"/>
+                <Grid VerticalOptions="CenterAndExpand"  
+                     Padding="0"  
+                     HorizontalOptions="FillAndExpand"  
+                     BackgroundColor="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="6*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0"
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center"  
+                       Text="วันที่รับเข้าครั้งแรก">
+                    </Label>
+                    <Label Grid.Row="0" Grid.Column="1"
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                       Text="{Binding firstReceiveDate}">
+                    </Label>
+                    <BoxView Grid.Row="1" Grid.ColumnSpan="2"  Color="Gray"  
+                        HorizontalOptions="FillAndExpand"  
+                        HeightRequest="1"/>
+                    <Label Grid.Row="2" Grid.Column="0" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="Lot No."/>
+                    <Label Grid.Row="2" Grid.Column="1" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="{Binding LotNo_Group}"/>
+                    <BoxView Grid.Row="3" Grid.ColumnSpan="2" Color="Gray"  
+                        HorizontalOptions="FillAndExpand"  
+                        HeightRequest="1"/>
+                    <Label Grid.Row="4" Grid.Column="0" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="จำนวน"/>
+                    <Label Grid.Row="4" Grid.Column="1" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="{Binding countQty}"/>
+                    <BoxView Grid.Row="5" Grid.ColumnSpan="2" Color="Gray"  
+                        HorizontalOptions="FillAndExpand"  
+                        HeightRequest="1"/>
+                    <Label Grid.Row="6" Grid.Column="0" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="หน่วย/หน่วยบรรจุ"/>
+                    <Label Grid.Row="6" Grid.Column="1" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="{Binding weightPerUnit}"/>
+                    <BoxView Grid.Row="7" Grid.ColumnSpan="2" Color="Gray"  
+                        HorizontalOptions="FillAndExpand"  
+                        HeightRequest="1"/>
+                    <Label Grid.Row="8" Grid.Column="0" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="น้ำหนัก Lot"/>
+                    <Label Grid.Row="8" Grid.Column="1" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                          Text="{Binding SumWeight}"/>
+                </Grid>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

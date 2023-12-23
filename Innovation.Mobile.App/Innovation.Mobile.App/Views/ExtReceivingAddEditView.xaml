@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Views.ExtReceivingAddEditView"
+             xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+             xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+             xmlns:controls="clr-namespace:Innovation.Mobile.App.Controls;assembly=Innovation.Mobile.App"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             Title="{Binding RMTitle}"
+             >
+    <ScrollView>
+        <StackLayout Orientation="Vertical">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TapCommand}"></TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
+            <Grid Padding="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" /> 
+                    <ColumnDefinition Width="6*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center"  
+                           Text="วันที่รับเข้าครั้งแรก">
+                </Label>
+                <DatePicker Grid.Row="0" Grid.Column="1" IsEnabled="{Binding IsFirstDate}"
+                    Date="{Binding FirstDate}" Format="dd/MM/yyyy" TabIndex="1"/>
+                <Label Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" 
+                              Text="วันที่ผลิต"/>
+                <DatePicker Grid.Row="1" Grid.Column="1" 
+                    Date="{Binding ProductionDate}" Format="dd/MM/yyyy" TabIndex="2" IsEnabled="{Binding IsLockEntryEdit}">
+                    <!--Lock-->
+                    <DatePicker.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="DateSelected"
+                                                          Command="{Binding ProdDateSelectedCommand}" />
+                    </DatePicker.Behaviors>                    
+                </DatePicker>
+                <StackLayout Grid.Row="2" Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Switch  IsToggled="{Binding IsSwitch}" IsEnabled="{Binding IsEditExpire}">
+                    </Switch>
+                    <Label IsEnabled="{Binding IsEditExpire}" Text="วันหมดอายุ" />
+                </StackLayout>
+                <DatePicker Grid.Row="2" Grid.Column="1"
+                            IsEnabled="{Binding IsSwitch}"
+                    Date="{Binding ExpireDate}" Format="dd/MM/yyyy"/>
+                <Label Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Center" 
+                              Text="วันที่บัญชี"/>
+                <DatePicker Grid.Row="3" Grid.Column="1"
+                            IsEnabled="{Binding IsLockAcc}"
+                    Date="{Binding AccountDate}" Format="dd/MM/yyyy"/>
+                <Label Grid.Row="4" Grid.Column="0" 
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
+                              Text="หมายเลข Lot"/>
+                <Entry Grid.Row="4" Grid.Column="1" x:Name="lotno"
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
+                           Text="{Binding LotNo_Group}" CursorPosition="1" TabIndex="4" ReturnType="Next"
+                           IsEnabled="{Binding LockEditData}"
+                           MaxLength="{Binding MaxlenLotGrroup}"
+                           Keyboard="Text">
+                    <!--Lock-->
+                    <Entry.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="TextChanged" 
+                                                              Command="{Binding LotChangedCommand}"
+                                                              />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Grid.Row="5" Grid.Column="0" 
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
+                              Text="จำนวน"/>
+                <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+                    <Entry HorizontalOptions="FillAndExpand"
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
+                           Keyboard="Numeric" Text="{Binding Qty}" TabIndex="5" ReturnType="Next" 
+                           IsEnabled="{Binding LockEditData}">
+                        <!--Lock-->
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="TextChanged" 
+                                                              Command="{Binding TextChangedCommand}"
+                                                              EventArgsConverter="{StaticResource LocalTextAmountConverter}"/> 
+                        </Entry.Behaviors>
+                    </Entry>
+                    <controls:RoudedPicker HorizontalOptions="FillAndExpand"
+                            Title="Unit"
+                            ItemsSource="{Binding lstUnitCount}" 
+                            SelectedItem="{Binding SelectUnitCount, Mode=TwoWay}"  
+                            ItemDisplayBinding="{Binding unitName}" 
+                            IsEnabled="{Binding LockEditData}">
+                        <controls:RoudedPicker.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="Unfocused"
+                                                              Command="{Binding SelectedIndexUnit}"/>
+                        </controls:RoudedPicker.Behaviors>
+                    </controls:RoudedPicker>
+                    <!--Lock-->
+                </StackLayout>
+                <Label Grid.Row="6" Grid.Column="0" 
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
+                           Text="น้ำหนัก/หน่วยบรรจุ"/>
+                <Entry Grid.Row="6" Grid.Column="1" 
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
+                           Keyboard="Numeric" Text="{Binding WeightPerUnit}" TabIndex="7" ReturnType="Next" 
+                       IsEnabled="{Binding LockEditData}">
+                    <!--Lock-->
+                    <Entry.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="TextChanged" 
+                                                          Command="{Binding WeightPerUnitChangedCommand}"
+                                                         />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <StackLayout  Grid.Row="7" Grid.ColumnSpan="2">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" VerticalOptions="Center"
+                           Text="น้ำหนัก Lot :"/>
+                        <Entry Grid.Column="1"  Keyboard="Numeric" Text="{Binding TotalWeight}" IsEnabled="{Binding IsTotalWeight}" 
+                               VerticalOptions="Center"  ReturnType="Next"/>
+                        <Label  Grid.Column="2" VerticalOptions="Center"
+                           Text="น้ำหนักที่ต้องรับ :"/>
+                        <Label Grid.Column="3" VerticalOptions="Center"
+                           Text="{Binding MaterialReceivePlanMst.receivePlanDtl[0].receivingWeight}"/>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+            <StackLayout Orientation="Horizontal">
+                <Switch IsToggled="{Binding IsGenLotNo}" HorizontalOptions="Start" IsEnabled="{Binding IsSwitchLot}">
+                    <Switch.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="Toggled" 
+                                                          Command="{Binding GenLotNoToggledCommand}"
+                                                          EventArgsConverter="{StaticResource LocalToggledConverter}">
+                            
+                        </behaviors:EventToCommandBehavior>
+                    </Switch.Behaviors>
+                </Switch>
+                <Label VerticalOptions="Center"  Text="Generate Barcode" HorizontalOptions="StartAndExpand"/>
+                <Button HorizontalOptions="EndAndExpand" IsVisible="{Binding IsTotalWeight}" Command="{Binding BarcodeClickedCommand}"
+                        Text="Checklist" />
+                <Button HorizontalOptions="EndAndExpand" IsVisible="{Binding IsRePrint}" Command="{Binding ReprintClickedCommand}"
+                        Text="Print" />
+                <Button HorizontalOptions="EndAndExpand"  Command="{Binding EditBarcodeCommand}"
+                        Text="แก้ไขข้อมูล" IsVisible="{Binding IsHideEdit}"/>
+                <Button HorizontalOptions="EndAndExpand"  Command="{Binding CancelEditBarcodeCommand}"
+                        Text="ยกเลิกการแก้ไข" IsVisible="{Binding IsCancelEdit}" IsEnabled="{Binding IsEnCalcelEdit}"/>
+            </StackLayout>
+            <Frame IsClippedToBounds="True" HasShadow="True" Padding="0"  HeightRequest="400"
+               BackgroundColor="White"
+               IsVisible="{Binding IsGenLotNo}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TapCommand}"></TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+                <Frame.OutlineColor>
+                    <OnPlatform x:TypeArguments="Color"  
+                        Android="Gray"  
+                        iOS="Gray"/>
+                </Frame.OutlineColor>
+                <Frame.Margin>
+                    <OnPlatform x:TypeArguments="Thickness"  
+                         Android="10"   
+                         iOS="10"/>
+                </Frame.Margin>
+                <StackLayout Orientation="Horizontal">
+                    <ListView ItemsSource="{Binding ReceivePlanDtlBarcode, Mode=TwoWay}" CachingStrategy="RecycleElement"
+                         SeparatorVisibility="Default" HasUnevenRows="True"
+                         x:Name="lvGenLotNo">
+                        <ListView.Behaviors>
+                            <behaviors:EventToCommandBehavior 
+                                EventName="ItemTapped" 
+                                Command="{Binding BarcodeTappedCommand}" 
+                                EventArgsConverter="{StaticResource LocalItemTappedConverter}" >
+                            </behaviors:EventToCommandBehavior>
+                            <behaviors:EventToCommandBehavior 
+                                EventName="PropertyChanged" 
+                                Command="{Binding ppChangedCommand}" />
+                        </ListView.Behaviors>
+                        <ListView.Header>
+                            <Grid BackgroundColor="White" Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" 
+                                       Style="{StaticResource ListViewHeaderStyle}"  Text="หมายเลข Lot" />
+                                <Label Grid.Row="0" Grid.Column="1" 
+                                       Style="{StaticResource ListViewHeaderStyle}"  Text="น้ำหนัก" />
+                                <Label Grid.Row="0" Grid.Column="2" 
+                                       Style="{StaticResource ListViewHeaderStyle}"  Text="สถานะ" />
+                            </Grid>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid BackgroundColor="White" Padding="5"
+                                          x:Name="Item">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2.5*" />
+                                            <ColumnDefinition Width="0.5*" />
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="4*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Entry Grid.Column="0" 
+                                               Text ="{Binding LotNo_Group, Mode=TwoWay}" TabIndex="9" ReturnType="Next" IsEnabled="False">
+                                        </Entry>
+                                        <Label Grid.Column="1" 
+                                               Text ="-" >
+                                        </Label>
+                                        <Entry Grid.Column="2" 
+                                               Text ="{Binding lotNonum, Mode=TwoWay}" TabIndex="9" ReturnType="Next" MaxLength="{Binding MaxlenlotNonum, Mode=TwoWay}">
+                                        </Entry>
+                                        <Entry Grid.Column="3" Text="{Binding  qty, Mode=TwoWay}"  Keyboard="Numeric" TabIndex="10" ReturnType="Next" >
+                                            <Entry.Behaviors>
+                                                <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                                                  Command="{Binding Path=BindingContext.TapCommand, Source={x:Reference lvGenLotNo}}" />
+                                            </Entry.Behaviors>
+                                        </Entry>
+                                        <Label Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Medium" 
+                                               Text ="{Binding receivePlanDtlBarcodeStatusNameThai, Mode=TwoWay}" >
+                                        </Label>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Frame>
+            <Button Text="บันทึก" Command="{Binding SaveClickedCommand}" IsEnabled="{Binding LockBtn}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

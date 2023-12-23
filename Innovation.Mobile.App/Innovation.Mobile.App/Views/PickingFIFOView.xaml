@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Views.PickingFIFOView"
+             xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             Title="{Binding Title}">
+    <StackLayout>
+        <ListView ItemsSource="{Binding lstRMFIFO}"
+                CachingStrategy="RecycleElement"
+                  IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
+                SeparatorVisibility="Default" HasUnevenRows="True" >
+            <ListView.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0"
+                                       Style="{StaticResource ListViewHeaderStyle}"
+                                       Text="Barcode" />
+                    <Label Grid.Row="0" Grid.Column="1"
+                                       Style="{StaticResource ListViewHeaderStyle}"
+                                       Text="Batch No" />
+                    <Label Grid.Row="0" Grid.Column="2"
+                                       Style="{StaticResource ListViewHeaderStyle}"
+                                       Text="ล๊อตภายนอก" />
+                    <Label Grid.Row="0" Grid.Column="3"
+                                       Style="{StaticResource ListViewHeaderStyle}"
+                                       Text="คงเหลือ" />
+                    <Label Grid.Row="0" Grid.Column="4"
+                                       Style="{StaticResource ListViewHeaderStyle}"
+                                       Text="หมดอายุ" />
+                    <Label Grid.Row="0" Grid.Column="5"
+                                       Style="{StaticResource ListViewHeaderStyle}"
+                                       Text="คลัง" />
+                    <Label Grid.Row="0" Grid.Column="6"
+                                       Style="{StaticResource ListViewHeaderStyle}"
+                                       Text="สถานที่จัดเก็บ" />
+                    <Label Grid.Row="0" Grid.Column="7"
+                                       Style="{StaticResource ListViewHeaderStyle}"
+                                       Text="สถานะ QA" />
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid BackgroundColor="White"
+                                            x:Name="mainItem">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>  
+                            <Label  Grid.Column="0"
+                                                    Text="{Binding Barcode}" ></Label>
+                            <Label  Grid.Column="1"
+                                                    Text="{Binding BatchNo}" ></Label>
+                            <Label Grid.Column="2" 
+                                               Text="{Binding LotNo}" ></Label>
+                            <Label Grid.Column="3" 
+                                               FontSize="Medium"
+                                               Text="{Binding Balance}" ></Label>
+                            <Label Grid.Column="4" 
+                                               FontSize="Medium"
+                                               Text="{Binding ExpireDate}" ></Label>
+                            <Label Grid.Column="5" 
+                                               Text="{Binding WH_Name}" ></Label>
+                            <Label Grid.Column="6" 
+                                               Text="{Binding Location_Name}" ></Label>
+                            <Label Grid.Column="7" 
+                                               FontSize="Medium"
+                                               Text="{Binding QA_Status}" ></Label>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

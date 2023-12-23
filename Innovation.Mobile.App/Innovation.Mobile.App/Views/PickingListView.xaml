@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Views.PickingListView"
+             xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+             xmlns:controls="clr-namespace:Innovation.Mobile.App.Controls;assembly=Innovation.Mobile.App"      
+             xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             x:Name="Picking"
+             Title="รายการหยิบวัตถุดิบ"
+             >
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Padding="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" 
+                   Grid.Column="0" 
+                   FontSize="Medium"
+                   Text="วันที่เริ่ม :" 
+                   VerticalOptions="Center"
+                   FontAttributes="Bold"/>
+            <DatePicker Grid.Row="0" 
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
+                        MaximumDate="{Binding DateEnd}"
+                        Date="{Binding DateStart}" 
+                        Format="dd/MM/yyyy" 
+                        VerticalOptions="Center">
+                <!--<DatePicker.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="DateSelected"
+                                                      Command="{Binding SearchCommand}" />
+                </DatePicker.Behaviors>-->
+            </DatePicker>
+            <Label Grid.Row="1" 
+                   Grid.Column="0" 
+                   FontSize="Medium"
+                   Text="วันที่สิ้นสุด :" 
+                   VerticalOptions="Center"
+                   FontAttributes="Bold"/>
+            <DatePicker Grid.Row="1" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="3"
+                        MinimumDate="{Binding DateStart}"
+                        Date="{Binding DateEnd}" 
+                        Format="dd/MM/yyyy" VerticalOptions="Center">
+                <!--<DatePicker.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="DateSelected"
+                                                      Command="{Binding SearchCommand}" />
+                </DatePicker.Behaviors>-->
+            </DatePicker>
+            <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" 
+                       FontSize="Medium"
+                       Text="วัตถุประสงค์:" 
+                       VerticalOptions="Center"
+                       FontAttributes="Bold"/>
+                <Picker Grid.Row="1" 
+                        VerticalOptions="CenterAndExpand" 
+                        Title="เลือกวัตถุประสงค์" 
+                        ItemsSource="{Binding InventoryPurposeVMs}" 
+                        ItemDisplayBinding= "{Binding Name_Local}"/>
+            </Grid>
+            <!--<Picker Grid.Row="1" Grid.Column="0" VerticalOptions="CenterAndExpand"
+                Title="เลือกเอกสาร" ItemsSource="{Binding lstTitle}" />
+            <controls:RoundedEntry Grid.Row="1" Grid.Column ="1"  Grid.ColumnSpan="2" FontSize="Medium"
+                Placeholder="" Style="{StaticResource RoundedEntryStyle}" Text="{Binding DocNo, Mode=TwoWay}" />-->
+            <Button Grid.Row="2" Grid.Column="3"
+                    Text="Search" Command="{Binding SearchCommand}"/>
+        </Grid>
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Always" HorizontalScrollBarVisibility="Always" Orientation="Both">
+            <CollectionView 
+                            ItemsSource="{Binding PickingList}"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding PlanItemSelectedCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={RelativeSource Self}}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Black" Margin="0" Padding="0">
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" 
+                                   Grid.Row="0"
+                                   Text="Document No."
+                                   FontAttributes="Bold"/>
+                                <Label Grid.Column="1"
+                                   Grid.Row="0"
+                                   Text="{Binding RequestDocNo}" />
+                                <Label Grid.Column="0" 
+                                   Grid.Row="1"
+                                   Text="Pick Date"
+                                   FontAttributes="Bold"/>
+                                <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding expectDate, StringFormat='{0:dd/MM/yyyy}'}"
+                                   VerticalOptions="End" />
+                                <Label Grid.Column="0" 
+                                   Grid.Row="3"
+                                   Text="Purpose"
+                                   FontAttributes="Bold"/>
+                                <Label Grid.Column="1"
+                                   Grid.Row="3"
+                                   Text="{Binding OwnerSiteName}" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Views.InternalReceivingView"
+             xmlns:controls="clr-namespace:Innovation.Mobile.App.Controls;assembly=Innovation.Mobile.App"
+             xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             Title="Receiving Detail">
+    <StackLayout BackgroundColor="White" VerticalOptions="StartAndExpand">
+        <StackLayout Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <controls:RoundedEntry Grid.Row="0" Grid.Column="0" Placeholder="Barcode"  Text="{Binding Barcode}" HorizontalOptions="FillAndExpand" IsReadOnly="False" ReturnCommand="{Binding BtnScanCommand}" ClearButtonVisibility="WhileEditing"/>
+                <Button Text="{Binding StatusBtn}" Grid.Row="0" Grid.Column="1"  Command="{Binding QrScanCommand}" />
+                <Button Text="Reset" Grid.Row="0" Grid.Column="2" Command="{Binding ResetCommand}" />
+                <!--<Button Text="Search" Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand}"/>-->
+            </Grid>
+            <ListView 
+                  ItemsSource="{Binding lstReceiveDtlBarcode}" 
+                  CachingStrategy="RecycleElement"
+                  SeparatorVisibility="Default" 
+                  HasUnevenRows="True">
+                <ListView.BackgroundColor>White</ListView.BackgroundColor>
+                <ListView.Header>
+                    <Grid Padding="5" VerticalOptions="Center" BackgroundColor="LightGray">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="5*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Style="{StaticResource ListViewHeaderStyle}"
+                              FontSize="Large" Text="Barcode" />
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Style="{StaticResource ListViewHeaderStyle}"
+                              FontSize="Large" Text="Qty" />
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="{Binding ColorStatusCode ,Converter={StaticResource LocalLabelColorConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="5*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="0">
+                                    <Label  Text="{Binding barcode}" ></Label>
+                                    <Label  Text="{Binding batchNo}" IsVisible="{Binding IshideBatch}"></Label>
+                                </StackLayout>
+                                <Label Grid.Column="1" Text="{Binding qty}"  ></Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

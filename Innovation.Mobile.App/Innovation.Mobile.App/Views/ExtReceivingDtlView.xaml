@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Views.ExtReceivingDtlView"
+             xmlns:templetes="clr-namespace:Innovation.Mobile.App.Templates;assembly=Innovation.Mobile.App"
+             xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+             xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             Title="{Binding RMTitle}">
+    <StackLayout Orientation="Vertical">
+        <Button VerticalOptions="StartAndExpand"  
+                HorizontalOptions="FillAndExpand" 
+                Command="{Binding AddRMLotNoCommand}"
+                Text="เพิ่มรับเข้า" />
+        <ListView x:Name="listView"   
+                  SelectedItem="{Binding SelcetedItem,Mode=TwoWay}"   
+                  HasUnevenRows="True"  
+                  ItemsSource="{Binding lstLotNoByRM}" >
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="ItemTapped" 
+                                                  Command="{Binding RMLotNoTappedCommand}"
+                                                  EventArgsConverter="{StaticResource LocalItemTappedConverter}"
+                                                  >                    
+                </behaviors:EventToCommandBehavior>
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <templetes:CardViewTemplate />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Innovation.Mobile.App.Views.MenuView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+    xmlns:templates="clr-namespace:Innovation.Mobile.App.Templates"
+    xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+    Title=" "
+    utility:ViewModelLocator.AutoWireViewModel="True">
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="8*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Image Aspect="AspectFill" Source="innoweb3.jpg" />
+            <Grid BackgroundColor="#444444" Opacity="0.8" />
+            <Frame BackgroundColor="#50000000">
+                <StackLayout
+                    HorizontalOptions="CenterAndExpand"
+                    Opacity="1"
+                    VerticalOptions="CenterAndExpand">
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            Style="{StaticResource MenuLabelStyle}"
+                            Text="User : "
+                            TextColor="White" />
+                        <Label
+                            Style="{StaticResource MenuLabelStyle}"
+                            Text="{Binding UserName}"
+                            TextColor="White" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            Style="{StaticResource MenuLabelStyle}"
+                            Text="Site : "
+                            TextColor="White" />
+                        <Label
+                            Style="{StaticResource MenuLabelStyle}"
+                            Text="{Binding SiteName}"
+                            TextColor="White" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            Style="{StaticResource MenuLabelStyle}"
+                            Text="Printer : "
+                            TextColor="White" />
+                        <Label
+                            Style="{StaticResource MenuLabelStyle}"
+                            Text="{Binding PrinterName}"
+                            TextColor="White"
+                            VerticalOptions="Start" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListView
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="True"
+                ItemsSource="{Binding MenuItems}"
+                SeparatorVisibility="None">
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior Command="{Binding MenuItemTappedCommand}" EventName="ItemTapped" />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <templates:MenuItemTemplate />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Grid
+            Grid.Row="2"
+            Padding="10,10,0,10"
+            ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding LogoutCommand}" NumberOfTapsRequired="1" />
+            </Grid.GestureRecognizers>
+            <Image
+                Grid.Column="0"
+                HeightRequest="30"
+                Source="logout.png"
+                VerticalOptions="Center"
+                WidthRequest="30" />
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                Text="Log out"
+                TextColor="{StaticResource Danger}"
+                VerticalOptions="Center" />
+        </Grid>
+    </Grid>
+</ContentPage>

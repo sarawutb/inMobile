@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Views.PickingListDtlView"
+             xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+             xmlns:utilitys="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+             utilitys:ViewModelLocator.AutoWireViewModel="True"
+             Title="{Binding Title}" 
+             x:Name="PickingListDtl" >
+    <ScrollView>
+        <StackLayout Orientation="Vertical">
+            <ListView HeightRequest="250"
+                  ItemsSource="{Binding lstPickingGroupDtl}" CachingStrategy="RecycleElement"
+                  SeparatorVisibility="Default" HasUnevenRows="True"
+                      x:Name="lvMain">
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior 
+                    EventName="ItemTapped" 
+                    Command="{Binding RMTappedCommand}" 
+                    EventArgsConverter="{StaticResource LocalItemTappedConverter}" >
+                    </behaviors:EventToCommandBehavior>
+                </ListView.Behaviors> 
+                <ListView.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="0.3*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="Center"
+                               Style="{StaticResource ListViewHeaderStyle}"
+                               Text="RM Code" />
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="Center"
+                               Style="{StaticResource ListViewHeaderStyle}"
+                               Text="Lot ที่ต้องการ" />
+
+                        <Label Grid.Row="0" Grid.Column="2" HorizontalOptions="Center"
+                               Style="{StaticResource ListViewHeaderStyle}"
+                               Text="น้ำหนักที่ต้องการ" />
+                        <Label Grid.Row="0" Grid.Column="3" HorizontalOptions="Center"
+                               Style="{StaticResource ListViewHeaderStyle}"
+                               Text="น้ำหนักที่หยิบมาแล้ว" />
+                        <Label Grid.Row="0" Grid.Column="4" HorizontalOptions="Center"
+                               Style="{StaticResource ListViewHeaderStyle}"
+                               Text="น้ำหนักที่ต้องส่งชั่ง" />
+                        <Label Grid.Row="0" Grid.Column="5" HorizontalOptions="Center"
+                               Text="ไม่พบ" />
+                        <Label Grid.Row="0" Grid.Column="6" HorizontalOptions="Center"
+                               Text="FIFO" />
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="White"
+                                  x:Name="mainItem">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="0.3*" />
+                                    <ColumnDefinition Width="0.3*" />
+                                    <ColumnDefinition Width="0.3*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                    <Label FontSize="Medium" Text="{Binding RmId}"
+                                           VerticalOptions="Center"></Label>
+                                    <Label FontSize="Medium" Text="{Binding RmName}"
+                                           VerticalOptions="Center"/>
+                                </StackLayout>
+                                <Label Grid.Column="1" 
+                                   FontSize="Medium"
+                                   VerticalOptions="Center"
+                                   Text="{Binding Request_LotNo}" ></Label>
+                                <Label Grid.Column="2" 
+                                   FontSize="Medium"
+                                   VerticalOptions="Center"
+                                   Text="{Binding RequestWeight}" ></Label>
+                                <Label Grid.Column="3" 
+                                   FontSize="Medium"
+                                   VerticalOptions="Center"
+                                   Text="{Binding Total_Weight}" ></Label>
+                                <Label Grid.Column="4" 
+                                   FontSize="Medium"
+                                   VerticalOptions="Center"
+                                   Text="{Binding Residue_Weight}" ></Label>
+                                <ImageButton 
+                                        Source="lost.png" 
+                                        Grid.Column="5"
+                                        BackgroundColor="Transparent"
+                                        WidthRequest="50"
+                                        HeightRequest="50"
+                                        Aspect="AspectFit"
+                                             BindingContext="{Binding Source={x:Reference lvMain}, Path=BindingContext}"   
+                                                Command="{Binding NothingCommand}"   
+                                                CommandParameter="{Binding Source={x:Reference mainItem}, Path=BindingContext}">
+                                </ImageButton>
+                                <!--<Button Text="FIFO" Grid.Column="4"
+                                        ImageSource="icon.png"
+                                        BindingContext="{Binding Source={x:Reference lvMain}, Path=BindingContext}"   
+                                                Command="{Binding FIFOCommand}"   
+                                                CommandParameter="{Binding Source={x:Reference mainItem}, Path=BindingContext}" />-->
+                                <ImageButton 
+                                        Source="list.png" 
+                                        Grid.Column="6"
+                                        BackgroundColor="Transparent"
+                                        WidthRequest="50"
+                                        HeightRequest="50"
+                                        Aspect="AspectFit"
+                                             BindingContext="{Binding Source={x:Reference lvMain}, Path=BindingContext}"   
+                                                Command="{Binding FIFOCommand}"   
+                                                CommandParameter="{Binding Source={x:Reference mainItem}, Path=BindingContext}">
+                                </ImageButton>
+                                <!--<Button Grid.Column="5" Text="ส่ง"
+                                                BindingContext="{Binding Source={x:Reference lvMain}, Path=BindingContext}"   
+                                                Command="{Binding SendDTLCommand}"   
+                                                CommandParameter="{Binding Source={x:Reference mainItem}, Path=BindingContext}" />-->
+                                <ImageButton 
+                                        Source="weighing.png" 
+                                        Grid.Column="7"
+                                        BackgroundColor="Transparent"
+                                        WidthRequest="50"
+                                        HeightRequest="50"
+                                        Aspect="AspectFit"
+                                              BindingContext="{Binding Source={x:Reference lvMain}, Path=BindingContext}"   
+                                              Command="{Binding SendDTLCommand}"   
+                                              CommandParameter="{Binding Source={x:Reference mainItem}, Path=BindingContext}">
+                                </ImageButton>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                
+                <!--<Button Text="SB" Command="{Binding ScanCommand}"/>-->
+                    <StackLayout Grid.Column="0" Orientation="Horizontal">
+                        <Entry WidthRequest="250" Placeholder="Scan barcode" Text="{Binding Barcode}" ReturnCommand="{Binding BtnScanCommand}" ClearButtonVisibility="WhileEditing"/>
+                        <Button Text="{Binding StatusBtn}" Command="{Binding QrScanCommand}" CommandParameter="{Reference txtPickAmount}" />
+                </StackLayout>
+                <StackLayout Grid.Column="1" Orientation="Horizontal">
+                    <Label Text="น้ำหนักคงเหลือ"  VerticalOptions="Center"/>
+                    <Label Text="{Binding BarcodeBalance}" VerticalOptions="Center"/>
+                </StackLayout>
+                <StackLayout Grid.Column="2" Orientation="Horizontal">
+                    <Label Text="น้ำหนักที่ต้องหยิบเพิ่ม"  VerticalOptions="Center"/>
+                    <Label Text="{Binding Request_weight}" VerticalOptions="Center"/>
+                </StackLayout>
+                </Grid>
+            </StackLayout>
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"
+                           Text="น้ำหนัก/หน่วยบรรจุ" VerticalOptions="Center"/>
+                    <Label Grid.Column="1" 
+                           Text="{Binding WeightPerUnit}" VerticalOptions="Center" />
+                    <Label Grid.Column="2" HorizontalOptions="End"
+                           Text="จำนวนแพ็คเกจ" VerticalOptions="Center"/>
+                    <Entry Grid.Column="3" Keyboard="Numeric" x:Name="txtPickAmount"
+                           Text="{Binding PickAmount, Mode=TwoWay}"
+                           VerticalOptions="Center"
+                           IsEnabled="{Binding IsPickAmount}">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="TextChanged" 
+                                                              Command="{Binding PickAmountChangedCommand}"
+                                                              EventArgsConverter="{StaticResource LocalTextAmountConverter}"/>
+                            <behaviors:EventToCommandBehavior EventName="Completed"
+                                                              Command="{Binding SaveBarcodeCommand}" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Grid.Column="4" HorizontalOptions="End"
+                           Text="จำนวนเศษ" 
+                           VerticalOptions="Center"/>
+                    <Label Grid.Column="5"
+                           VerticalOptions="Center"
+                           Text="{Binding Residue}" />
+                    <Button Grid.Column="6" Text="เต็มแพ็ค" IsVisible="{Binding IsPack}" Command="{Binding RmPackCommand}"/>
+                </Grid>
+            </StackLayout>
+            <StackLayout>
+                <Button Text="บันทึก" Command="{Binding SaveBarcodeCommand}" />
+            </StackLayout>
+            <Frame HeightRequest="400"
+                IsClippedToBounds="True"  
+               HasShadow="True"  
+               Padding="2"  
+               BackgroundColor="White" >
+                <Frame.OutlineColor>
+                    <OnPlatform x:TypeArguments="Color"  
+                        Android="Gray"  
+                        iOS="Gray"/>
+                </Frame.OutlineColor>
+                <Frame.Margin>
+                    <OnPlatform x:TypeArguments="Thickness"  
+                         Android="10"   
+                         iOS="10"/>
+                </Frame.Margin>
+                <StackLayout Orientation="Vertical" Padding="2">
+                    <StackLayout Orientation="Horizontal" Padding="2">
+                        <Label Text="RM ID :"/>
+                        <Label Text="{Binding RMIDDtl}"/>
+                        <Label Text="        "/>
+                        <Label Text="สถานะ :" />
+                        <Label Text="{Binding PickingStatus}"/>
+                    </StackLayout>
+                    <ListView ItemsSource="{Binding lstPickingBarcode, Mode=TwoWay}" CachingStrategy="RecycleElement"
+                              SeparatorVisibility="Default" HasUnevenRows="True"
+                              x:Name="lvBarcode" >
+                        <ListView.Header>
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="1"
+                                   Style="{StaticResource ListViewHeaderStyle}"
+                                   Text="Barcode" />
+                                <Label Grid.Row="0" Grid.Column="2"
+                                   Style="{StaticResource ListViewHeaderStyle}"
+                                   Text="จำนวนหน่วยบรรจุ" />
+                                <Label Grid.Row="0" Grid.Column="3"
+                                   Style="{StaticResource ListViewHeaderStyle}"
+                                   Text="น้ำหนัก/หน่วยบรรจุ" />
+                                <Label Grid.Row="0" Grid.Column="4"
+                                   Style="{StaticResource ListViewHeaderStyle}"
+                                   Text="น้ำหนักรวมแพ็คเกจเต็ม" />
+                                <Label Grid.Row="0" Grid.Column="5"
+                                   Style="{StaticResource ListViewHeaderStyle}"
+                                   Text="น้ำหนักเศษที่สั่งชั่ง" />
+                                <Label Grid.Row="0" Grid.Column="6"
+                                   Style="{StaticResource ListViewHeaderStyle}"
+                                   Text="น้ำหนักเศษชั่งแล้ว" />
+                            </Grid>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid BackgroundColor="{Binding colorStatus,Converter={StaticResource LocalLabelColorConverter}}" x:Name="Item" Padding="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.5*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0" 
+                                                  IsChecked="{Binding IsSelect}" />
+                                        <StackLayout Grid.Column="1" Orientation="Vertical" Spacing="0" >
+                                            <Label  FontSize="Medium" Text="{Binding Barcode}" 
+                                               />
+                                            <Label  FontSize="Medium" Text="{Binding BatchNo}" 
+                                              />
+                                        </StackLayout>
+                                        <Label Grid.Column="2" 
+                                           FontSize="Medium" HorizontalOptions="End"
+                                           Text="{Binding Package_QTY_Show}" 
+                                               VerticalOptions="Center"/>
+                                        <Label Grid.Column="3" 
+                                           FontSize="Medium" HorizontalOptions="End"
+                                           Text="{Binding Weight_Per_Package}" 
+                                                VerticalOptions="Center" />
+                                        <Label Grid.Column="4" 
+                                           FontSize="Medium" HorizontalOptions="End"
+                                           Text="{Binding Total_Weight}" 
+                                                VerticalOptions="Center"/>
+                                        <Label Grid.Column="5" 
+                                           FontSize="Medium" HorizontalOptions="End"
+                                           Text="{Binding Request_Residue_Weight}" 
+                                                VerticalOptions="Center"/>
+                                        <Label Grid.Column="6" 
+                                           FontSize="Medium" HorizontalOptions="End"
+                                           Text="{Binding Residue_Weight}" 
+                                                VerticalOptions="Center"/>
+                                        
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="Print/Complete" Command="{Binding PrintBarcodeCommand}"   ></Button>
+                        <Button Text="พิมพ์ใบส่งของ" IsVisible="{Binding PrintDeliveryReportBtnVisibled}" Command="{Binding PrintDeliveryReportCommand}"></Button>
+                        <Button Text="Delete" Command="{Binding DeleteBarcodeCommand}" ></Button>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

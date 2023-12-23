@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Views.ReceivingListView"
+             xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+             xmlns:controls="clr-namespace:Innovation.Mobile.App.Controls;assembly=Innovation.Mobile.App"             
+             xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             x:Name="Receiving"
+             Title="Receiving plan"
+             >
+    <Grid RowSpacing="0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Padding="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <!--<RowDefinition Height="*" />-->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.4*" />
+                <ColumnDefinition Width="2.6*" />
+                <ColumnDefinition Width="2.4*" />
+                <ColumnDefinition Width="2.6*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" FontSize="Medium"
+                Text="เลือกวันที่เริ่ม :" VerticalOptions="Center" />
+            <DatePicker Grid.Row="0" Grid.Column="1" MaximumDate="{Binding DateEnd}"
+                Date="{Binding DateStart}" Format="dd/MM/yyyy" VerticalOptions="Center">
+                <DatePicker.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="DateSelected"
+                                                      Command="{Binding SearchCommand}" />
+                </DatePicker.Behaviors>
+            </DatePicker>
+            <Label Grid.Row="0" Grid.Column="2" FontSize="Medium"
+                Text="เลือกวันที่สิ้นสุด :" VerticalOptions="Center" />
+            <DatePicker Grid.Row="0" Grid.Column="3" MinimumDate="{Binding DateStart}"
+                Date="{Binding DateEnd}" Format="dd/MM/yyyy" VerticalOptions="Center">
+                <DatePicker.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="DateSelected"
+                                                      Command="{Binding SearchCommand}" />
+                </DatePicker.Behaviors>
+            </DatePicker>
+            <!--<Picker Grid.Row="1" Grid.Column="0" VerticalOptions="CenterAndExpand"
+                Title="เลือกเอกสาร" ItemsSource="{Binding lstTitle}" IsVisible="False" />
+            <controls:RoundedEntry Grid.Row="1" Grid.Column ="1"  Grid.ColumnSpan="2"
+                Placeholder="" Style="{StaticResource RoundedEntryStyle}" Text="{Binding DocNo, Mode=TwoWay}" IsVisible="False"/>
+            <Button Grid.Row="1" Grid.Column="3"
+                    Text="Search" Command="{Binding SearchCommand}" IsVisible="False"/>-->
+        </Grid>
+        <Grid Grid.Row="1" Padding="5" BackgroundColor="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="4*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" FontSize="Medium"
+                             VerticalOptions="Center"  Text="เลขที่เอกสาร" />
+            <Label Grid.Row="0" Grid.Column="1" FontSize="Medium"
+                             VerticalOptions="Center"   Text="วันที่ของถึงคลัง" />
+            <Label Grid.Row="0" Grid.Column="2" FontSize="Medium"
+                             VerticalOptions="Center"   Text="ที่มา" />
+        </Grid>
+        <ListView Grid.Row="2" 
+                  ItemsSource="{Binding ReceivePlan}" 
+                  CachingStrategy="RecycleElement"
+                  IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
+                  SeparatorVisibility="Default" HasUnevenRows="True">
+            <ListView.BackgroundColor>Gray</ListView.BackgroundColor>
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior 
+                    EventName="ItemTapped" 
+                    Command="{Binding ReceivePlanTappedCommand}" 
+                    EventArgsConverter="{StaticResource LocalItemTappedConverter}" >
+                </behaviors:EventToCommandBehavior>
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell >
+                        <Grid  Padding="5" BackgroundColor="{Binding ColorCode,Converter={StaticResource LocalLabelColorConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="4*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                <Label Text="{Binding DocNoMobileShow}" VerticalOptions="Center"></Label>
+                            </StackLayout>
+                            <Label Grid.Column="1" Text="{Binding requestReceiveDate, StringFormat='{0:dd/MM/yyyy}'}"  VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="{Binding suppName}" VerticalOptions="Center"></Label>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

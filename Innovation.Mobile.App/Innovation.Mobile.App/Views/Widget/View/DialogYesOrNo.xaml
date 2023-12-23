@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Innovation.Mobile.App.Views.Widget.DialogYesOrNoView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dxp="http://schemas.devexpress.com/xamarin/2014/forms/popup"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    BackgroundColor=" #20000000">
+    <ContentPage.Content>
+        <!--<dxp:DXPopup
+            x:Name="Popup"
+            AllowScrim="True"
+            IsOpen="True">-->
+        <StackLayout>
+            <Frame
+                CornerRadius="10"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="250">
+                <StackLayout>
+                    <forms:AnimationView
+                        x:Name="animationView"
+                        Animation="Warning.json"
+                        AnimationSource="AssetOrBundle"
+                        AutoPlay="True"
+                        HeightRequest="100"
+                        HorizontalOptions="CenterAndExpand"
+                        Speed="1.5"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="100" />
+                    <BoxView HeightRequest="10" />
+                    <Label
+                        FontFamily="Kanit"
+                        FontSize="17"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="แน่ใจว่าต้องการออกจากระบบ ?" />
+                    <BoxView HeightRequest="10" />
+                    <Grid HorizontalOptions="Center" WidthRequest="250">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            Grid.Column="0"
+                            BackgroundColor="{StaticResource Danger}"
+                            Clicked="OnButtonNo"
+                            CornerRadius="10"
+                            Text="ไม่"
+                            TextColor="{StaticResource White}"
+                            VerticalOptions="CenterAndExpand" />
+                        <Button
+                            Grid.Column="1"
+                            Clicked="OnButtonYes"
+                            CornerRadius="10"
+                            Style="{StaticResource ButtonPrimary}"
+                            Text="ใช่"
+                            TextColor="{StaticResource White}"
+                            VerticalOptions="CenterAndExpand" />
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        <!--</dxp:DXPopup>-->
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Innovation.Mobile.App.Views.InternalReceivingBarcodeDetailView"
+             xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+             xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             Title="Barcode Detail"
+             >
+    <StackLayout Orientation="Vertical">
+        <ScrollView HeightRequest="300">
+            <Grid Padding="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" FontSize="Medium"
+                       VerticalOptions="Center" Text="RM Name :"/>
+                <Label Grid.Row="0" Grid.Column="1" FontSize="Medium"
+                       VerticalOptions="Center" Text="{Binding selectBarcode.rmName}"/>
+                <Label Grid.Row="1" Grid.Column="0" FontSize="Medium"
+                       VerticalOptions="Center" Text="QTY :"/>
+                <Label Grid.Row="1" Grid.Column="1" FontSize="Medium"
+                       VerticalOptions="Center" Text="{Binding selectBarcode.qty}"/>
+                <Label Grid.Row="2" Grid.Column="0" FontSize="Medium"
+                       VerticalOptions="Center" Text="Lot No. :"/>
+                <Label Grid.Row="2" Grid.Column="1" FontSize="Medium"
+                       VerticalOptions="Center" Text="{Binding LotNoShow}"/>
+                <Label Grid.Row="3" Grid.Column="0" FontSize="Medium"
+                       VerticalOptions="Center" Text="Expire Date :"/>
+                <Label Grid.Row="3" Grid.Column="1" FontSize="Medium"
+                       VerticalOptions="Center" Text="{Binding selectBarcode.expireDate}"/>
+                <Label Grid.Row="4" Grid.Column="0" FontSize="Medium"
+                       VerticalOptions="Center" Text="Receive Status :"/>
+                <Label Grid.Row="4" Grid.Column="1" FontSize="Medium"
+                       VerticalOptions="Center" Text="{Binding selectBarcode.receivePlanDtlBarcodeStatusNameThai}"/>
+            </Grid>
+        </ScrollView>
+        <StackLayout Orientation="Horizontal" BackgroundColor="DarkGray">
+            <Switch x:Name="swtIsOpenScrollview" IsToggled="{Binding IsOpenScrollview, Mode=TwoWay}" IsEnabled="{Binding LockSwitch}">
+                <Switch.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="Toggled" Command="{Binding GetOpenScrollView, Mode=OneWayToSource}"></behaviors:EventToCommandBehavior>
+                </Switch.Behaviors>
+            </Switch>
+            <Label VerticalOptions="Center" Text="RM มีปัญหา" />
+            <Label VerticalOptions="Center" HorizontalOptions="EndAndExpand" Text="จำนวนการพิมพ์ :" />
+            <Entry VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
+                   IsEnabled="{Binding LockBtnPrint}" Keyboard="Numeric" 
+                   TabIndex="1" ReturnType="Next" Text="{Binding BarcodeQty}" WidthRequest="100"
+                    HorizontalTextAlignment="Start" VerticalTextAlignment="Center" >
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged" 
+                                                      Command="{Binding WeightChangedCommand}"
+                                                      EventArgsConverter="{StaticResource LocalTextAmountConverter}"
+                                                         />
+                </Entry.Behaviors>
+            </Entry>
+
+            <Button Text="พิมพ์" Command="{Binding RePrintCommand}" HorizontalOptions="EndAndExpand" VerticalOptions="Center" IsEnabled="{Binding LockBtnPrint}"></Button>
+        </StackLayout>
+        <StackLayout IsVisible="{Binding IsOpenScrollview}" >
+            <ScrollView >
+                <StackLayout  HeightRequest="400">
+                    <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical">
+                        <ListView
+                    VerticalOptions="FillAndExpand"
+                    HasUnevenRows="true"
+                    CachingStrategy="RecycleElement"
+                    SeparatorVisibility="Default"
+                    ItemsSource="{Binding CheckLists,Mode=TwoWay}">
+                            <ListView.Header>
+                                <Grid Padding="3" VerticalOptions="Center" BackgroundColor="WhiteSmoke">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="9*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0"
+                              FontSize="Medium" Text="เช็ค" />
+                                    <Label Grid.Row="0" Grid.Column="1"
+                              FontSize="Medium" Text="หัวข้อ" />
+                                </Grid>
+                            </ListView.Header>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid BackgroundColor="White" Padding="5" x:Name="other">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="9*" />
+                                            </Grid.ColumnDefinitions>
+                                            <CheckBox Grid.Column="0" IsChecked="{Binding IsCheck, Mode=TwoWay}"></CheckBox>
+                                            <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                                <Label  Text="{Binding Name_TH}" VerticalOptions="Center"></Label>
+                                                <Entry 
+                                                       IsVisible="{Binding IsOpenEnt}"
+                                                       Text="{Binding Description ,Mode=TwoWay}"
+                                                       Placeholder="เพิ่มเติม..."  VerticalOptions="Center" HorizontalOptions="FillAndExpand"></Entry>
+                                            </StackLayout>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <Button Text="บักทึก" Command="{Binding SendDataCommand}" IsEnabled="{Binding LockBtn}"></Button> 
+    </StackLayout>
+</ContentPage>
