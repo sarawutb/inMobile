@@ -62,9 +62,17 @@
               "target": "Package",
               "version": "[4.0.11, )"
             },
+            "DevExpress.XamarinForms.CollectionView": {
+              "target": "Package",
+              "version": "[21.2.11, )"
+            },
             "DevExpress.XamarinForms.Editors": {
               "target": "Package",
-              "version": "[20.1.7, )"
+              "version": "[21.2.11, )"
+            },
+            "DevExpress.XamarinForms.Grid": {
+              "target": "Package",
+              "version": "[21.2.11, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",

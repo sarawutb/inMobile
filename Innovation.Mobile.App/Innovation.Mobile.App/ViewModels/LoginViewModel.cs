@@ -427,60 +427,47 @@ namespace Innovation.Mobile.App.ViewModels
                     IsBusy = true;
                     try
                     {
-                        if (_connectionService.IsConnected)
+                        var a = _connectionService.IsConnected;
+                        var LoginVM = new LoginVm
                         {
-                            var a = _connectionService.IsConnected;
-                            var LoginVM = new LoginVm
-                            {
-                                Username = UserName,
-                                Password = Password,
-                            };
-
-
-                            var UserSetting = await DependencyService.Get<ILoadingService>().Loading<ApplicationUser>(await _authenticationService.CheckPermissionAsync(LoginVM), TimeoutLoading: 3000);
-                            if (UserSetting != null)
-                            {
-                                try
-                                {
-                                    _settingsService.UserSetting = new ApplicationUser
-                                    {
-                                        UserOperationSite = UserSetting.UserOperationSite,
-                                    };
-                                    _settingsService.TokenSetting = UserSetting.token;
-                                    var SiteAndPrinter = await _dialogService.DialogSiteAndPrinter(true);
-                                    if (SiteAndPrinter != null)
-                                    {
-                                        _settingsService.UserSetting = UserSetting;
-                                        _settingsService.UserIdSetting = _settingsService.UserSetting.UserId.ToString();
-                                        _settingsService.PasswordSetting = Password;
-                                        _settingsService.UserNameSetting = _settingsService.UserSetting.UserWindow;
-                                        _settingsService.UserFullNameSetting = _settingsService.UserSetting.UserFullName;
-                                        _settingsService.UserSetting.token = _settingsService.UserSetting.token;
-                                        _settingsService.SiteIdSetting = SiteAndPrinter.siteProfile.Site_ID.ToString();
-                                        _settingsService.SiteNameSetting = SiteAndPrinter.siteProfile.Site_Name;
-                                        _settingsService.PrintIPAdressFormSetting = SiteAndPrinter.printerProfile.Printer_IP_Address;
-                                        _settingsService.PrintPortFormSetting = SiteAndPrinter.printerProfile.Printer_Port;
-                                        _settingsService.PrintNameFormSetting = SiteAndPrinter.printerProfile.Printer_Name;
-                                        await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Success, "สำเร็จ");
-                                        await _navigationService.NavigateToAsync<MainViewModel>();
-                                        ResetFormLogin();
-                                    }
-                                    IsBusy = false;
-                                }
-                                catch (Exception ex)
-                                {
-                                    await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, ex.ToString());
-                                }
-                            }
-                            else
-                            {
-                                await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error,
-                                "ไม่พบชื่อผู้ใช้นี้! \nเกิดข้อผิดพลาดในการ Login");
-                            }
-                        }
-                        else
+                            Username = UserName,
+                            Password = Password,
+                        };
+                        var UserSetting = await DependencyService.Get<ILoadingService>().Loading(_authenticationService.CheckPermissionAsync(LoginVM), TimeoutLoading: 1000);
+                        if (UserSetting != null)
                         {
-                            await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "กรุณาตรวจสอบการเชื่อมต่อ WIFI!");
+                            try
+                            {
+                                _settingsService.UserSetting = new ApplicationUser
+                                {
+                                    UserOperationSite = UserSetting.UserOperationSite,
+                                };
+                                _settingsService.TokenSetting = UserSetting.token;
+                                var SiteAndPrinter = await _dialogService.DialogSiteAndPrinter(true);
+                                if (SiteAndPrinter != null)
+                                {
+                                    _settingsService.UserSetting = UserSetting;
+                                    _settingsService.UserIdSetting = _settingsService.UserSetting.UserId.ToString();
+                                    _settingsService.PasswordSetting = Password;
+                                    _settingsService.UserNameSetting = _settingsService.UserSetting.UserWindow;
+                                    _settingsService.UserFullNameSetting = _settingsService.UserSetting.UserFullName;
+                                    _settingsService.UserSetting.token = _settingsService.UserSetting.token;
+                                    _settingsService.SiteIdSetting = SiteAndPrinter.siteProfile.Site_ID.ToString();
+                                    _settingsService.BaseApiUrlBySite = SiteAndPrinter.siteProfile.Site_ApiUrl;
+                                    _settingsService.SiteNameSetting = SiteAndPrinter.siteProfile.Site_Name;
+                                    _settingsService.PrintIPAdressFormSetting = SiteAndPrinter.printerProfile.Printer_IP_Address;
+                                    _settingsService.PrintPortFormSetting = SiteAndPrinter.printerProfile.Printer_Port;
+                                    _settingsService.PrintNameFormSetting = SiteAndPrinter.printerProfile.Printer_Name;
+                                    await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Success, "สำเร็จ");
+                                    await _navigationService.NavigateToAsync<MainViewModel>();
+                                    ResetFormLogin();
+                                }
+                                IsBusy = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, ex.ToString());
+                            }
                         }
                     }
                     catch (Exception e)

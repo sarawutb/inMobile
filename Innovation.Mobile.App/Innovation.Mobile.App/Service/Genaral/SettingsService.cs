@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reactive.Linq;
+using Innovation.Mobile.App.Constants;
 
 namespace Innovation.Mobile.App.Service.Genaral
 {
@@ -30,6 +31,7 @@ namespace Innovation.Mobile.App.Service.Genaral
         private const string CurrentForm = "CurrentForm";
         private string _MstId;
         private string _DtlId;
+        private string _BaseApiUrlBySite = ApiConstants.BaseApiUrlNew;
 
         private ApplicationUser User;
         public SettingsService(IBlobCache cache = null) : base(cache)
@@ -113,6 +115,11 @@ namespace Innovation.Mobile.App.Service.Genaral
         {
             get => GetItem(UserFullName);
             set => AddItem(UserFullName, value);
+        }
+        public string BaseApiUrlBySite
+        {
+            get =>  string.IsNullOrEmpty(GetItem(_BaseApiUrlBySite)) ? ApiConstants.BaseApiCenter : GetItem(_BaseApiUrlBySite);
+            set => AddItem(_BaseApiUrlBySite, value);
         }
         public string BarcodeSetting
         {

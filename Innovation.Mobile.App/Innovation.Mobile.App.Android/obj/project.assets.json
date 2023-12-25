@@ -137,10 +137,28 @@
           }
         }
       },
-      "DevExpress.XamarinForms.Core/20.1.7": {
+      "DevExpress.XamarinForms.CollectionView/21.2.11": {
         "type": "package",
         "dependencies": {
-          "Xamarin.Forms": "3.6.0.264807"
+          "DevExpress.XamarinForms.Core": "[21.2.11]",
+          "Xamarin.Forms": "5.0.0.2012",
+          "Xamarin.Kotlin.StdLib": "1.4.20"
+        },
+        "compile": {
+          "lib/MonoAndroid10/DevExpress.Xamarin.Android.CollectionView.dll": {},
+          "lib/MonoAndroid10/DevExpress.XamarinForms.CollectionView.Android.dll": {},
+          "lib/MonoAndroid10/DevExpress.XamarinForms.CollectionView.dll": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/DevExpress.Xamarin.Android.CollectionView.dll": {},
+          "lib/MonoAndroid10/DevExpress.XamarinForms.CollectionView.Android.dll": {},
+          "lib/MonoAndroid10/DevExpress.XamarinForms.CollectionView.dll": {}
+        }
+      },
+      "DevExpress.XamarinForms.Core/21.2.11": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Forms": "5.0.0.2012"
         },
         "compile": {
           "lib/MonoAndroid10/DevExpress.XamarinForms.Core.Android.dll": {},
@@ -155,12 +173,14 @@
           }
         }
       },
-      "DevExpress.XamarinForms.Editors/20.1.7": {
+      "DevExpress.XamarinForms.Editors/21.2.11": {
         "type": "package",
         "dependencies": {
-          "DevExpress.XamarinForms.Core": "[20.1.7]",
-          "Xamarin.Forms": "3.6.0.264807",
-          "Xamarin.Kotlin.StdLib": "1.3.31"
+          "DevExpress.XamarinForms.CollectionView": "[21.2.11]",
+          "DevExpress.XamarinForms.Core": "[21.2.11]",
+          "Xamarin.AndroidX.AutoFill": "1.1.0.6",
+          "Xamarin.Forms": "5.0.0.2012",
+          "Xamarin.Kotlin.StdLib": "1.4.20"
         },
         "compile": {
           "lib/MonoAndroid10/DevExpress.Xamarin.Android.Editors.dll": {},
@@ -171,6 +191,29 @@
           "lib/MonoAndroid10/DevExpress.Xamarin.Android.Editors.dll": {},
           "lib/MonoAndroid10/DevExpress.XamarinForms.Editors.Android.dll": {},
           "lib/MonoAndroid10/DevExpress.XamarinForms.Editors.dll": {}
+        }
+      },
+      "DevExpress.XamarinForms.Grid/21.2.11": {
+        "type": "package",
+        "dependencies": {
+          "DevExpress.XamarinForms.Core": "[21.2.11]",
+          "DevExpress.XamarinForms.Editors": "[21.2.11]",
+          "Xamarin.Forms": "5.0.0.2012",
+          "Xamarin.Kotlin.StdLib": "1.4.20"
+        },
+        "compile": {
+          "lib/MonoAndroid10/DevExpress.Xamarin.Android.Grid.dll": {},
+          "lib/MonoAndroid10/DevExpress.XamarinForms.Grid.Android.dll": {},
+          "lib/MonoAndroid10/DevExpress.XamarinForms.Grid.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/MonoAndroid10/DevExpress.Xamarin.Android.Grid.dll": {},
+          "lib/MonoAndroid10/DevExpress.XamarinForms.Grid.Android.dll": {},
+          "lib/MonoAndroid10/DevExpress.XamarinForms.Grid.dll": {
+            "related": ".xml"
+          }
         }
       },
       "FastAndroidCamera/2.0.0": {
@@ -943,6 +986,25 @@
         },
         "build": {
           "buildTransitive/monoandroid90/Xamarin.AndroidX.AsyncLayoutInflater.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.AutoFill/1.1.0.6": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Java.Interop"
+        ],
+        "compile": {
+          "lib/monoandroid90/Xamarin.AndroidX.AutoFill.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/monoandroid90/Xamarin.AndroidX.AutoFill.dll": {
+            "related": ".pdb"
+          }
+        },
+        "build": {
+          "buildTransitive/monoandroid9.0/Xamarin.AndroidX.AutoFill.targets": {}
         }
       },
       "Xamarin.AndroidX.Browser/1.3.0.6": {
@@ -2500,13 +2562,53 @@
           "buildTransitive/monoandroid50/Xamarin.Google.Guava.ListenableFuture.targets": {}
         }
       },
-      "Xamarin.Kotlin.StdLib/1.3.31": {
+      "Xamarin.Jetbrains.Annotations/13.0.0.3": {
         "type": "package",
+        "frameworkAssemblies": [
+          "Java.Interop"
+        ],
         "compile": {
-          "lib/MonoAndroid/Xamarin.Kotlin.StdLib.dll": {}
+          "lib/monoandroid10.0/Xamarin.Jetbrains.Annotations.dll": {}
         },
         "runtime": {
-          "lib/MonoAndroid/Xamarin.Kotlin.StdLib.dll": {}
+          "lib/monoandroid10.0/Xamarin.Jetbrains.Annotations.dll": {}
+        },
+        "build": {
+          "build/monoandroid10.0/Xamarin.Jetbrains.Annotations.targets": {}
+        }
+      },
+      "Xamarin.Kotlin.StdLib/1.5.0": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Jetbrains.Annotations": "13.0.0.3",
+          "Xamarin.Kotlin.StdLib.Common": "1.5.0"
+        },
+        "frameworkAssemblies": [
+          "Java.Interop"
+        ],
+        "compile": {
+          "lib/monoandroid90/Xamarin.Kotlin.StdLib.dll": {}
+        },
+        "runtime": {
+          "lib/monoandroid90/Xamarin.Kotlin.StdLib.dll": {}
+        },
+        "build": {
+          "buildTransitive/monoandroid9.0/Xamarin.Kotlin.StdLib.targets": {}
+        }
+      },
+      "Xamarin.Kotlin.StdLib.Common/1.5.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Java.Interop"
+        ],
+        "compile": {
+          "lib/monoandroid90/Xamarin.Kotlin.StdLib.Common.dll": {}
+        },
+        "runtime": {
+          "lib/monoandroid90/Xamarin.Kotlin.StdLib.Common.dll": {}
+        },
+        "build": {
+          "buildTransitive/monoandroid9.0/Xamarin.Kotlin.StdLib.Common.targets": {}
         }
       },
       "ZXing.Net/0.16.6": {
@@ -2554,7 +2656,9 @@
           "Acr.UserDialogs": "7.0.1",
           "Autofac": "4.6.2",
           "Com.Airbnb.Xamarin.Forms.Lottie": "4.0.11",
-          "DevExpress.XamarinForms.Editors": "20.1.7",
+          "DevExpress.XamarinForms.CollectionView": "21.2.11",
+          "DevExpress.XamarinForms.Editors": "21.2.11",
+          "DevExpress.XamarinForms.Grid": "21.2.11",
           "NLog": "5.2.4",
           "Newtonsoft.Json": "11.0.2",
           "Polly": "5.9.0",
@@ -2759,14 +2863,32 @@
         "readme.txt"
       ]
     },
-    "DevExpress.XamarinForms.Core/20.1.7": {
-      "sha512": "wZODwh6UyYkXoQrKu6/GS1+bitXLx10x/4MQpLDyiwQw3d1R9UKvWZErW10XYwRU/U7eyr4X1ndEcTMdVsGFRQ==",
+    "DevExpress.XamarinForms.CollectionView/21.2.11": {
+      "sha512": "0/AZtTms3rWBDkqV7zvmUhHoh3+bkld+ljC8orlMFiP7iKjfr6x0/VQWG4Ta/BqjU957xLR1PuybKAPV/VDWZQ==",
       "type": "package",
-      "path": "devexpress.xamarinforms.core/20.1.7",
+      "path": "devexpress.xamarinforms.collectionview/21.2.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.xamarinforms.core.20.1.7.nupkg.sha512",
+        "devexpress.xamarinforms.collectionview.21.2.11.nupkg.sha512",
+        "devexpress.xamarinforms.collectionview.nuspec",
+        "lib/MonoAndroid10/DevExpress.Xamarin.Android.CollectionView.dll",
+        "lib/MonoAndroid10/DevExpress.XamarinForms.CollectionView.Android.dll",
+        "lib/MonoAndroid10/DevExpress.XamarinForms.CollectionView.dll",
+        "lib/Xamarin.iOS10/DevExpress.Xamarin.iOS.CollectionView.dll",
+        "lib/Xamarin.iOS10/DevExpress.XamarinForms.CollectionView.dll",
+        "lib/Xamarin.iOS10/DevExpress.XamarinForms.CollectionView.iOS.dll",
+        "lib/netstandard2.0/DevExpress.XamarinForms.CollectionView.dll"
+      ]
+    },
+    "DevExpress.XamarinForms.Core/21.2.11": {
+      "sha512": "+v6O1e5nCTtVBS6jnASJDocxIiXKU0BBH1OXHHDZ8Y5+oTGe+Lg+9RII5bGKhdIXIGy1EG/zbdAdRWg82mR+UQ==",
+      "type": "package",
+      "path": "devexpress.xamarinforms.core/21.2.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "devexpress.xamarinforms.core.21.2.11.nupkg.sha512",
         "devexpress.xamarinforms.core.nuspec",
         "lib/MonoAndroid10/DevExpress.XamarinForms.Core.Android.dll",
         "lib/MonoAndroid10/DevExpress.XamarinForms.Core.dll",
@@ -2778,14 +2900,14 @@
         "lib/netstandard2.0/DevExpress.XamarinForms.Core.xml"
       ]
     },
-    "DevExpress.XamarinForms.Editors/20.1.7": {
-      "sha512": "SmculzqfUBONM8vDMCwqgeWar4CSJD7YkhDTpDBKSYVZFpxLWK6s5ThSRqEJB64n19Qu5DKKYpOFFuqAsjn4RA==",
+    "DevExpress.XamarinForms.Editors/21.2.11": {
+      "sha512": "sNO9C9y1MAp0b0DV4MN4V+iOWHzWpWQjmI8EpL6+q4htVuxUdC+sS1XlNZczHoZVz/8ZuG6iPra5OIP4MjPylA==",
       "type": "package",
-      "path": "devexpress.xamarinforms.editors/20.1.7",
+      "path": "devexpress.xamarinforms.editors/21.2.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.xamarinforms.editors.20.1.7.nupkg.sha512",
+        "devexpress.xamarinforms.editors.21.2.11.nupkg.sha512",
         "devexpress.xamarinforms.editors.nuspec",
         "lib/MonoAndroid10/DevExpress.Xamarin.Android.Editors.dll",
         "lib/MonoAndroid10/DevExpress.XamarinForms.Editors.Android.dll",
@@ -2794,6 +2916,27 @@
         "lib/Xamarin.iOS10/DevExpress.XamarinForms.Editors.dll",
         "lib/Xamarin.iOS10/DevExpress.XamarinForms.Editors.iOS.dll",
         "lib/netstandard2.0/DevExpress.XamarinForms.Editors.dll"
+      ]
+    },
+    "DevExpress.XamarinForms.Grid/21.2.11": {
+      "sha512": "04/P1X9uuFdUXMjehBxrfYTHQyveaity8kZGy2MN5zF1Nk7P5+j1lz1Cr+YB2LU87PD5Zdn4kVynMj5KqzQ2jA==",
+      "type": "package",
+      "path": "devexpress.xamarinforms.grid/21.2.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "devexpress.xamarinforms.grid.21.2.11.nupkg.sha512",
+        "devexpress.xamarinforms.grid.nuspec",
+        "lib/MonoAndroid10/DevExpress.Xamarin.Android.Grid.dll",
+        "lib/MonoAndroid10/DevExpress.XamarinForms.Grid.Android.dll",
+        "lib/MonoAndroid10/DevExpress.XamarinForms.Grid.dll",
+        "lib/MonoAndroid10/DevExpress.XamarinForms.Grid.xml",
+        "lib/Xamarin.iOS10/DevExpress.Xamarin.iOS.Grid.dll",
+        "lib/Xamarin.iOS10/DevExpress.XamarinForms.Grid.dll",
+        "lib/Xamarin.iOS10/DevExpress.XamarinForms.Grid.iOS.dll",
+        "lib/Xamarin.iOS10/DevExpress.XamarinForms.Grid.xml",
+        "lib/netstandard2.0/DevExpress.XamarinForms.Grid.dll",
+        "lib/netstandard2.0/DevExpress.XamarinForms.Grid.xml"
       ]
     },
     "FastAndroidCamera/2.0.0": {
@@ -3951,6 +4094,23 @@
         "lib/net6.0-android31.0/Xamarin.AndroidX.AsyncLayoutInflater.xml",
         "xamarin.androidx.asynclayoutinflater.1.0.0.10.nupkg.sha512",
         "xamarin.androidx.asynclayoutinflater.nuspec"
+      ]
+    },
+    "Xamarin.AndroidX.AutoFill/1.1.0.6": {
+      "sha512": "SaykTozzgEdUbCe1gKukL5Tq0JOZwczTwAve5CikcYXxxr4qz6PWJ1fMbNoG4iXG7ae/86uIqURFR4Mku+Ovtg==",
+      "type": "package",
+      "path": "xamarin.androidx.autofill/1.1.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "aar/androidx.autofill.autofill.aar",
+        "build/monoandroid9.0/Xamarin.AndroidX.AutoFill.targets",
+        "buildTransitive/monoandroid9.0/Xamarin.AndroidX.AutoFill.targets",
+        "lib/monoandroid90/Xamarin.AndroidX.AutoFill.dll",
+        "lib/monoandroid90/Xamarin.AndroidX.AutoFill.pdb",
+        "xamarin.androidx.autofill.1.1.0.6.nupkg.sha512",
+        "xamarin.androidx.autofill.nuspec"
       ]
     },
     "Xamarin.AndroidX.Browser/1.3.0.6": {
@@ -5361,17 +5521,49 @@
         "xamarin.google.guava.listenablefuture.nuspec"
       ]
     },
-    "Xamarin.Kotlin.StdLib/1.3.31": {
-      "sha512": "VmuhbhpLcwCbZ/4Dy/WAeru8QPIymz1FoEP+ssv5+nP85pQCKoJXxMVAlqa5ADoC7S4ktw00fzYi0Tjn4sXpPA==",
+    "Xamarin.Jetbrains.Annotations/13.0.0.3": {
+      "sha512": "YBQJ/J9ClC+7upizNaZH4qjGgM5LsNdygV4MqPMDUopHBulsyv2VPDUHar1xxIvgEzOuGoSjsaENosZWS+lKXA==",
       "type": "package",
-      "path": "xamarin.kotlin.stdlib/1.3.31",
+      "path": "xamarin.jetbrains.annotations/13.0.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "THIRD-PARTY-NOTICES.txt",
-        "lib/MonoAndroid/Xamarin.Kotlin.StdLib.dll",
-        "xamarin.kotlin.stdlib.1.3.31.nupkg.sha512",
+        "LICENSE.md",
+        "build/monoandroid10.0/Xamarin.Jetbrains.Annotations.targets",
+        "jar/org.jetbrains.annotations.jar",
+        "lib/monoandroid10.0/Xamarin.Jetbrains.Annotations.dll",
+        "xamarin.jetbrains.annotations.13.0.0.3.nupkg.sha512",
+        "xamarin.jetbrains.annotations.nuspec"
+      ]
+    },
+    "Xamarin.Kotlin.StdLib/1.5.0": {
+      "sha512": "hhF0gakc6uKZiUpQNgD+S5pGJViiOG2kURjpdJvzb6t3X4D2fNfba2BVdvdYsG0Vc4+T7yUcKstOwnXs9pcOQA==",
+      "type": "package",
+      "path": "xamarin.kotlin.stdlib/1.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "buildTransitive/monoandroid9.0/Xamarin.Kotlin.StdLib.targets",
+        "jar/org.jetbrains.kotlin.kotlin-stdlib.jar",
+        "lib/monoandroid90/Xamarin.Kotlin.StdLib.dll",
+        "xamarin.kotlin.stdlib.1.5.0.nupkg.sha512",
         "xamarin.kotlin.stdlib.nuspec"
+      ]
+    },
+    "Xamarin.Kotlin.StdLib.Common/1.5.0": {
+      "sha512": "c7frBzOzrhh4GuPOYAB665UBNNxLRFklnlpmA9/M3boHhudDPEuAexpYJQTzTc1kc2hr/XI8bh9i2e49oSzKTQ==",
+      "type": "package",
+      "path": "xamarin.kotlin.stdlib.common/1.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "buildTransitive/monoandroid9.0/Xamarin.Kotlin.StdLib.Common.targets",
+        "jar/org.jetbrains.kotlin.kotlin-stdlib-common.jar",
+        "lib/monoandroid90/Xamarin.Kotlin.StdLib.Common.dll",
+        "xamarin.kotlin.stdlib.common.1.5.0.nupkg.sha512",
+        "xamarin.kotlin.stdlib.common.nuspec"
       ]
     },
     "ZXing.Net/0.16.6": {
@@ -5496,6 +5688,7 @@
       "Xamarin.AndroidX.Print >= 1.0.0.10",
       "Xamarin.Forms >= 5.0.0.2578",
       "Xamarin.Google.Android.Material >= 1.4.0.4",
+      "Xamarin.Kotlin.StdLib >= 1.5.0",
       "ZXing.Net.Mobile >= 3.1.0-beta2"
     ]
   },
@@ -5593,6 +5786,10 @@
           "Xamarin.Google.Android.Material": {
             "target": "Package",
             "version": "[1.4.0.4, )"
+          },
+          "Xamarin.Kotlin.StdLib": {
+            "target": "Package",
+            "version": "[1.5.0, )"
           },
           "ZXing.Net.Mobile": {
             "target": "Package",

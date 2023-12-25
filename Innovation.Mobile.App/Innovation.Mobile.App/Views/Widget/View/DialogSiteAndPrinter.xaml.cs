@@ -27,7 +27,7 @@ namespace Innovation.Mobile.App.Views.Widget.View
         {
             InitializePage();
         }
-        void InitializePage()
+        public void InitializePage()
         {
             InitializeComponent();
             _viewModel = AppContainer.Resolve<DialogSiteAndPrinterViewModel>();
@@ -36,19 +36,7 @@ namespace Innovation.Mobile.App.Views.Widget.View
         }
         public async Task<SiteAndPrinter> Show(bool isRefresh)
         {
-            if (isRefresh)
-            {
-                InitializePage();
-            }
-            else
-            {
-                if (_settingsService != null)
-                {
-                    var CerrentSite = _viewModel.LstPrinterProfile.FirstOrDefault(s => s.Site_id.ToString() == _settingsService.SiteIdSetting);
-                    _viewModel.OnSelectSite(CerrentSite);
-                }
-            }
-            return await _viewModel.Show(this);
+            return await _viewModel.Show(this, isRefresh);
         }
         protected override bool OnBackButtonPressed()
         {

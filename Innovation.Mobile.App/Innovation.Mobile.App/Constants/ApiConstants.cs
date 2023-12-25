@@ -13,7 +13,7 @@ namespace Innovation.Mobile.App.Constants
         public const string MaterialAutoReceivingEndpoint = "api/MaterialAutoReceiving";
 
 
-        //public const string BaseApiUrlNew = "http://10.0.2.2:5001/";
+        public const string BaseApiCenter = "http://192.168.32.14:5001/";
         public const string BaseApiUrlNew = "http://192.168.32.16:5001/";
         public const string MaterialTransfer = "api/MaterialTransfer";
         public const string MaterialReceive = "api/MaterialReceive";

@@ -8,5 +8,6 @@ namespace Innovation.Mobile.App.Models
     {
         public int Site_ID { get; set; }
         public string Site_Name { get; set; }
+        public string Site_ApiUrl { get; set; }
     }
 }

@@ -21,6 +21,7 @@
                         DisplayMember="Site_Name"
                         ItemsSource="{Binding LstSiteProfile}"
                         LabelText="Site"
+                        SelectedIndex="-1"
                         SelectedItem="{Binding SiteProfile}"
                         SelectionChangedCommand="{Binding SelectSiteCommand}"
                         Style="{StaticResource InputPrimary}"

@@ -15,6 +15,6 @@ namespace Innovation.Mobile.App.Views
 		public ReceivingListView ()
 		{
 			InitializeComponent ();
-		}
-	}
+        }
+    }
 }

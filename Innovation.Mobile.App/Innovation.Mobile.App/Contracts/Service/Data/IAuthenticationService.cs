@@ -9,12 +9,12 @@ namespace Innovation.Mobile.App.Contracts.Service.Data
     public interface IAuthenticationService
     {
         Task<ApplicationUser> GetSiteAsync(string userName);
-        Task<String> CheckPermissionAsync(string Username, string Password, int site_id);
+        Task<String> CheckPermissionAsync(string Username, string Password, int siteID);
         Task<ApplicationUser> ValidateUserWIthToken(string token);
         bool IsUserAuthenticated();
 
         //new
         Task<ApplicationUser> CheckPermissionAsync(LoginVm loginVm);
-        Task<List<Printer_Profile>> GetPrinterProfiles();
+        Task<List<Printer_Profile>> GetPrinterProfiles(string siteID);
     }
 }

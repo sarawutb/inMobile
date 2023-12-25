@@ -27,5 +27,6 @@ namespace Innovation.Mobile.App.Contracts.Service.Genaral
         ApplicationUser UserSetting { get; set; }
         void GetTokenAsync();
         string CurrentFormSetting { get; set; } 
+        string BaseApiUrlBySite { get; set; } 
     }
 }

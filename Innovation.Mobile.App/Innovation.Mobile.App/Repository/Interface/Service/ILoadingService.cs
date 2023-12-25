@@ -9,7 +9,7 @@ namespace Innovation.Mobile.App.Repository.Interface.Service
     public interface ILoadingService
     {
         Task DialogDownload();
-        Task Loading(Action loadingAction, bool IsCloseLoading, int TimeoutLoading);
-        Task<T> Loading<T>(T Result, bool IsCloseLoading = false, int TimeoutLoading = 100);
+        Task Loading(Action loadingAction, bool IsCloseLoading = false, int TimeoutLoading = 1000);
+        Task<T> Loading<T>(Task<T> loadingAction, bool IsCloseLoading = false, int TimeoutLoading = 1000);
     }
 }

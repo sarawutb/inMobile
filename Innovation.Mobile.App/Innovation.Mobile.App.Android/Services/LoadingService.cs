@@ -41,18 +41,25 @@ namespace Innovation.Mobile.App.Service
             }
         }
 
-        public async Task<T> Loading<T>(T Result, bool IsCloseLoading, int TimeoutLoading)
+        //public async Task<T> Loading<T>(Task<T> Result, bool IsCloseLoading, int TimeoutLoading)
+        public async Task<T> Loading<T>(Task<T> loadingAction, bool IsCloseLoading, int TimeoutLoading)
         {
+            var Result = default(T);
             try
             {
                 await DependencyService.Get<LoadingView>().Show(IsCloseLoading);
-                Func<T> loadingAction = delegate ()
-                {
-                    return Result;
-                };
-                Result = loadingAction.Invoke();
+                //await Task.Run(() =>
+                //{
+                //    Func<T> loadingAction = delegate ()
+                //    {
+                //        return Result;
+                //    };
+                //    Result = loadingAction.Invoke();
+                //});
+                Result =  loadingAction.Result;
                 await Task.Delay(TimeoutLoading);
                 await DependencyService.Get<LoadingView>().Hide();
+               
                 return Result;
             }
             catch (System.Exception ex)

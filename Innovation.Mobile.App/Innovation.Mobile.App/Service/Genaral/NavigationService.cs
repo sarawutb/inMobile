@@ -124,6 +124,8 @@ namespace Innovation.Mobile.App.Service.Genaral
 
                 if (mainPage.Detail is InnoNavigationPage navigationPage)
                 {
+                    navigationPage.BarTextColor = (Color)Application.Current.Resources["InnovationPrimaryDark"];
+
                     var currentPage = navigationPage.CurrentPage;
 
                     if (currentPage.GetType() != page.GetType())
@@ -134,6 +136,7 @@ namespace Innovation.Mobile.App.Service.Genaral
                 else
                 {
                     navigationPage = new InnoNavigationPage(page);
+                    navigationPage.BarTextColor = (Color)Application.Current.Resources["InnovationPrimaryDark"];
                     mainPage.Detail = navigationPage;
                 }
 

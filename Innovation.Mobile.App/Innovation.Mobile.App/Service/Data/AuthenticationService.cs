@@ -27,7 +27,7 @@ namespace Innovation.Mobile.App.Service.Data
             _genericRepository = genericRepository;
         }
 
-        public async Task<String> CheckPermissionAsync(string Username, string Password, int site_id)
+        public async Task<String> CheckPermissionAsync(string Username, string Password, int siteID)
         {
             string apiurl = ApiConstants.BaseApiUrl + ApiConstants.AuthenticateEndpoint + "/ValidateUserPassword?username=" + Username + "&password=" + Password + "&ProgramCode=" + programCode;
             var token = await _genericRepository.GetAsync<string>(apiurl);
@@ -74,9 +74,9 @@ namespace Innovation.Mobile.App.Service.Data
             return result;
         }
 
-        public async Task<List<Printer_Profile>> GetPrinterProfiles()
+        public async Task<List<Printer_Profile>> GetPrinterProfiles(string SiteID)
         {
-            var URL = ApiConstants.AuthenticationMobile + "/GetPrinterProfile";
+            var URL = ApiConstants.AuthenticationMobile + "/GetPrinterProfile?SiteID=" + SiteID;
             var PrinterProfile = await _genericRepository.GetAsync<List<Printer_Profile>>(URL);
             return PrinterProfile;
         }

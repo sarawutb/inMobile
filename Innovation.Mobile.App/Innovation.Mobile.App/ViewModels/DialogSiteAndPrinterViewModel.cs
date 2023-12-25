@@ -27,7 +27,6 @@ namespace Innovation.Mobile.App.ViewModels
     public class DialogSiteAndPrinterViewModel : ViewModelBase
     {
         private readonly IAuthenticationService _authenticationService;
-        private readonly ISettingsService _settingsService;
         private SiteProfile _SiteProfile;
         private List<Printer_Profile> _LstPrinterProfile = new List<Printer_Profile>();
         private Printer_Profile _PrinterProfile;
@@ -37,11 +36,9 @@ namespace Innovation.Mobile.App.ViewModels
             IConnectionService connectionService,
             INavigationService navigationService,
             IDialogService dialogService,
-            IAuthenticationService authenticationService,
-            ISettingsService settingsService) : base(connectionService, navigationService, dialogService)
+            IAuthenticationService authenticationService) : base(connectionService, navigationService, dialogService)
         {
             _authenticationService = authenticationService;
-            _settingsService = settingsService;
         }
 
         public event EventHandler<SiteAndPrinter> OnReturnSiteAndPrinterAsync;
@@ -60,19 +57,22 @@ namespace Innovation.Mobile.App.ViewModels
         {
             try
             {
+                LstPrinterProfile.Clear();
                 PrinterProfile = null;
-                if (SiteProfile != null)
+                if (_SiteProfile != null)
                 {
-                    _settingsService.SiteIdSetting = SiteProfile.Site_ID.ToString();
-                    _settingsService.SiteNameSetting = SiteProfile.Site_Name;
-                    LstPrinterProfile = await DependencyService.Get<ILoadingService>().Loading<List<Printer_Profile>>(await _authenticationService.GetPrinterProfiles());
+                    LstPrinterProfile = await DependencyService.Get<ILoadingService>().Loading(_authenticationService.GetPrinterProfiles(_SiteProfile.Site_ID.ToString()));
+                }
+                else if (!string.IsNullOrEmpty(CurrentSite as string))
+                {
+                    var _currentSite = CurrentSite as string;
+                    LstPrinterProfile = await DependencyService.Get<ILoadingService>().Loading(_authenticationService.GetPrinterProfiles(_currentSite));
+                }
 
-                    if (CurrentSite != null)
-                    {
-                        SiteProfile = CurrentSite as SiteProfile;
-                    }
-                    PrinterProfile = LstPrinterProfile.FirstOrDefault(p => p.Printer_IP_Address == _settingsService.PrintIPAdressFormSetting && p.Printer_Port == _settingsService.PrintPortFormSetting && p.Printer_Name == _settingsService.PrintNameFormSetting
-                    );
+                _PrinterProfile = LstPrinterProfile.FirstOrDefault(p => p.Printer_IP_Address == _settingsService.PrintIPAdressFormSetting && p.Printer_Port == _settingsService.PrintPortFormSetting && p.Printer_Name == _settingsService.PrintNameFormSetting);
+                if (_PrinterProfile != null)
+                {
+                    PrinterProfile = _PrinterProfile;
                 }
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace Innovation.Mobile.App.ViewModels
         }
         public SiteProfile SiteProfile
         {
-            get => _SiteProfile ?? _settingsService.UserSetting.UserOperationSite.FirstOrDefault(s => s.Site_ID.ToString() == _settingsService.SiteIdSetting);
+            get => _settingsService.UserSetting.UserOperationSite.FirstOrDefault(s => s.Site_ID.ToString() == _settingsService.SiteIdSetting) ?? _SiteProfile;
             set
             {
                 _SiteProfile = value;
@@ -105,7 +105,7 @@ namespace Innovation.Mobile.App.ViewModels
         }
         public Printer_Profile PrinterProfile
         {
-            get => _PrinterProfile;
+            get => _LstPrinterProfile.FirstOrDefault(p => p.Printer_IP_Address == _settingsService.PrintIPAdressFormSetting && p.Printer_Port == _settingsService.PrintPortFormSetting && p.Printer_Name == _settingsService.PrintNameFormSetting) ?? _PrinterProfile;
             set
             {
                 _PrinterProfile = value;
@@ -144,9 +144,20 @@ namespace Innovation.Mobile.App.ViewModels
             OnReturnSiteAndPrinterAsync += handler;
             return tcs.Task;
         }
-        public async Task<SiteAndPrinter> Show(DialogSiteAndPrinter page)
+        public async Task<SiteAndPrinter> Show(DialogSiteAndPrinter page,bool isRefresh)
         {
             await _navigationService.NavigateModalAsync(page, false);
+            if (isRefresh)
+            {
+                page.InitializePage();
+            }
+            else
+            {
+                if (_settingsService != null)
+                {
+                    OnSelectSite(_settingsService.SiteIdSetting);
+                }
+            }
             return await GetOnReturnSiteAndPrinterHandlerAsync();
         }
         protected async Task Close()

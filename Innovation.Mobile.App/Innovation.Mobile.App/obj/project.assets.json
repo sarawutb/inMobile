@@ -85,10 +85,23 @@
           }
         }
       },
-      "DevExpress.XamarinForms.Core/20.1.7": {
+      "DevExpress.XamarinForms.CollectionView/21.2.11": {
         "type": "package",
         "dependencies": {
-          "Xamarin.Forms": "3.6.0.264807"
+          "DevExpress.XamarinForms.Core": "[21.2.11]",
+          "Xamarin.Forms": "5.0.0.2012"
+        },
+        "compile": {
+          "lib/netstandard2.0/DevExpress.XamarinForms.CollectionView.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/DevExpress.XamarinForms.CollectionView.dll": {}
+        }
+      },
+      "DevExpress.XamarinForms.Core/21.2.11": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Forms": "5.0.0.2012"
         },
         "compile": {
           "lib/netstandard2.0/DevExpress.XamarinForms.Core.dll": {
@@ -101,17 +114,36 @@
           }
         }
       },
-      "DevExpress.XamarinForms.Editors/20.1.7": {
+      "DevExpress.XamarinForms.Editors/21.2.11": {
         "type": "package",
         "dependencies": {
-          "DevExpress.XamarinForms.Core": "[20.1.7]",
-          "Xamarin.Forms": "3.6.0.264807"
+          "DevExpress.XamarinForms.CollectionView": "[21.2.11]",
+          "DevExpress.XamarinForms.Core": "[21.2.11]",
+          "Xamarin.Forms": "5.0.0.2012"
         },
         "compile": {
           "lib/netstandard2.0/DevExpress.XamarinForms.Editors.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/DevExpress.XamarinForms.Editors.dll": {}
+        }
+      },
+      "DevExpress.XamarinForms.Grid/21.2.11": {
+        "type": "package",
+        "dependencies": {
+          "DevExpress.XamarinForms.Core": "[21.2.11]",
+          "DevExpress.XamarinForms.Editors": "[21.2.11]",
+          "Xamarin.Forms": "5.0.0.2012"
+        },
+        "compile": {
+          "lib/netstandard2.0/DevExpress.XamarinForms.Grid.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/DevExpress.XamarinForms.Grid.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {
@@ -584,14 +616,32 @@
         "readme.txt"
       ]
     },
-    "DevExpress.XamarinForms.Core/20.1.7": {
-      "sha512": "wZODwh6UyYkXoQrKu6/GS1+bitXLx10x/4MQpLDyiwQw3d1R9UKvWZErW10XYwRU/U7eyr4X1ndEcTMdVsGFRQ==",
+    "DevExpress.XamarinForms.CollectionView/21.2.11": {
+      "sha512": "0/AZtTms3rWBDkqV7zvmUhHoh3+bkld+ljC8orlMFiP7iKjfr6x0/VQWG4Ta/BqjU957xLR1PuybKAPV/VDWZQ==",
       "type": "package",
-      "path": "devexpress.xamarinforms.core/20.1.7",
+      "path": "devexpress.xamarinforms.collectionview/21.2.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.xamarinforms.core.20.1.7.nupkg.sha512",
+        "devexpress.xamarinforms.collectionview.21.2.11.nupkg.sha512",
+        "devexpress.xamarinforms.collectionview.nuspec",
+        "lib/MonoAndroid10/DevExpress.Xamarin.Android.CollectionView.dll",
+        "lib/MonoAndroid10/DevExpress.XamarinForms.CollectionView.Android.dll",
+        "lib/MonoAndroid10/DevExpress.XamarinForms.CollectionView.dll",
+        "lib/Xamarin.iOS10/DevExpress.Xamarin.iOS.CollectionView.dll",
+        "lib/Xamarin.iOS10/DevExpress.XamarinForms.CollectionView.dll",
+        "lib/Xamarin.iOS10/DevExpress.XamarinForms.CollectionView.iOS.dll",
+        "lib/netstandard2.0/DevExpress.XamarinForms.CollectionView.dll"
+      ]
+    },
+    "DevExpress.XamarinForms.Core/21.2.11": {
+      "sha512": "+v6O1e5nCTtVBS6jnASJDocxIiXKU0BBH1OXHHDZ8Y5+oTGe+Lg+9RII5bGKhdIXIGy1EG/zbdAdRWg82mR+UQ==",
+      "type": "package",
+      "path": "devexpress.xamarinforms.core/21.2.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "devexpress.xamarinforms.core.21.2.11.nupkg.sha512",
         "devexpress.xamarinforms.core.nuspec",
         "lib/MonoAndroid10/DevExpress.XamarinForms.Core.Android.dll",
         "lib/MonoAndroid10/DevExpress.XamarinForms.Core.dll",
@@ -603,14 +653,14 @@
         "lib/netstandard2.0/DevExpress.XamarinForms.Core.xml"
       ]
     },
-    "DevExpress.XamarinForms.Editors/20.1.7": {
-      "sha512": "SmculzqfUBONM8vDMCwqgeWar4CSJD7YkhDTpDBKSYVZFpxLWK6s5ThSRqEJB64n19Qu5DKKYpOFFuqAsjn4RA==",
+    "DevExpress.XamarinForms.Editors/21.2.11": {
+      "sha512": "sNO9C9y1MAp0b0DV4MN4V+iOWHzWpWQjmI8EpL6+q4htVuxUdC+sS1XlNZczHoZVz/8ZuG6iPra5OIP4MjPylA==",
       "type": "package",
-      "path": "devexpress.xamarinforms.editors/20.1.7",
+      "path": "devexpress.xamarinforms.editors/21.2.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.xamarinforms.editors.20.1.7.nupkg.sha512",
+        "devexpress.xamarinforms.editors.21.2.11.nupkg.sha512",
         "devexpress.xamarinforms.editors.nuspec",
         "lib/MonoAndroid10/DevExpress.Xamarin.Android.Editors.dll",
         "lib/MonoAndroid10/DevExpress.XamarinForms.Editors.Android.dll",
@@ -619,6 +669,27 @@
         "lib/Xamarin.iOS10/DevExpress.XamarinForms.Editors.dll",
         "lib/Xamarin.iOS10/DevExpress.XamarinForms.Editors.iOS.dll",
         "lib/netstandard2.0/DevExpress.XamarinForms.Editors.dll"
+      ]
+    },
+    "DevExpress.XamarinForms.Grid/21.2.11": {
+      "sha512": "04/P1X9uuFdUXMjehBxrfYTHQyveaity8kZGy2MN5zF1Nk7P5+j1lz1Cr+YB2LU87PD5Zdn4kVynMj5KqzQ2jA==",
+      "type": "package",
+      "path": "devexpress.xamarinforms.grid/21.2.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "devexpress.xamarinforms.grid.21.2.11.nupkg.sha512",
+        "devexpress.xamarinforms.grid.nuspec",
+        "lib/MonoAndroid10/DevExpress.Xamarin.Android.Grid.dll",
+        "lib/MonoAndroid10/DevExpress.XamarinForms.Grid.Android.dll",
+        "lib/MonoAndroid10/DevExpress.XamarinForms.Grid.dll",
+        "lib/MonoAndroid10/DevExpress.XamarinForms.Grid.xml",
+        "lib/Xamarin.iOS10/DevExpress.Xamarin.iOS.Grid.dll",
+        "lib/Xamarin.iOS10/DevExpress.XamarinForms.Grid.dll",
+        "lib/Xamarin.iOS10/DevExpress.XamarinForms.Grid.iOS.dll",
+        "lib/Xamarin.iOS10/DevExpress.XamarinForms.Grid.xml",
+        "lib/netstandard2.0/DevExpress.XamarinForms.Grid.dll",
+        "lib/netstandard2.0/DevExpress.XamarinForms.Grid.xml"
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
@@ -1700,7 +1771,9 @@
       "Acr.UserDialogs >= 7.0.1",
       "Autofac >= 4.6.2",
       "Com.Airbnb.Xamarin.Forms.Lottie >= 4.0.11",
-      "DevExpress.XamarinForms.Editors >= 20.1.7",
+      "DevExpress.XamarinForms.CollectionView >= 21.2.11",
+      "DevExpress.XamarinForms.Editors >= 21.2.11",
+      "DevExpress.XamarinForms.Grid >= 21.2.11",
       "NETStandard.Library >= 2.0.3",
       "NLog >= 5.2.4",
       "Newtonsoft.Json >= 11.0.2",
@@ -1776,9 +1849,17 @@
             "target": "Package",
             "version": "[4.0.11, )"
           },
+          "DevExpress.XamarinForms.CollectionView": {
+            "target": "Package",
+            "version": "[21.2.11, )"
+          },
           "DevExpress.XamarinForms.Editors": {
             "target": "Package",
-            "version": "[20.1.7, )"
+            "version": "[21.2.11, )"
+          },
+          "DevExpress.XamarinForms.Grid": {
+            "target": "Package",
+            "version": "[21.2.11, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",

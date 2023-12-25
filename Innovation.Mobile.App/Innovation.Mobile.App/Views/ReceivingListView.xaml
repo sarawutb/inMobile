@@ -1,100 +1,328 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Innovation.Mobile.App.Views.ReceivingListView"
-             xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
-             xmlns:controls="clr-namespace:Innovation.Mobile.App.Controls;assembly=Innovation.Mobile.App"             
-             xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
-             utility:ViewModelLocator.AutoWireViewModel="True"
-             x:Name="Receiving"
-             Title="Receiving plan"
-             >
-    <Grid RowSpacing="0" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60" />
-            <RowDefinition Height="60" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Padding="2">
+<ContentPage
+    x:Class="Innovation.Mobile.App.Views.ReceivingListView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Innovation.Mobile.App.Behaviors;assembly=Innovation.Mobile.App"
+    xmlns:controls="clr-namespace:Innovation.Mobile.App.Controls;assembly=Innovation.Mobile.App"
+    xmlns:dxcv="clr-namespace:DevExpress.XamarinForms.CollectionView;assembly=DevExpress.XamarinForms.CollectionView"
+    xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors"
+    xmlns:dxg="clr-namespace:DevExpress.XamarinForms.DataGrid;assembly=DevExpress.XamarinForms.Grid"
+    xmlns:utility="clr-namespace:Innovation.Mobile.App.Utility;assembly=Innovation.Mobile.App"
+    xmlns:viewmodels="clr-namespace:Innovation.Mobile.App.ViewModels"
+    x:Name="Receiving"
+    Title="ราการรับเข้าวัตถุดิบ"
+    utility:ViewModelLocator.AutoWireViewModel="True">
+    <StackLayout>
+        <Grid RowSpacing="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="35" />
                 <RowDefinition Height="*" />
-                <!--<RowDefinition Height="*" />-->
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.4*" />
-                <ColumnDefinition Width="2.6*" />
-                <ColumnDefinition Width="2.4*" />
-                <ColumnDefinition Width="2.6*" />
-            </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" FontSize="Medium"
-                Text="เลือกวันที่เริ่ม :" VerticalOptions="Center" />
-            <DatePicker Grid.Row="0" Grid.Column="1" MaximumDate="{Binding DateEnd}"
-                Date="{Binding DateStart}" Format="dd/MM/yyyy" VerticalOptions="Center">
-                <DatePicker.Behaviors>
-                    <behaviors:EventToCommandBehavior EventName="DateSelected"
-                                                      Command="{Binding SearchCommand}" />
-                </DatePicker.Behaviors>
-            </DatePicker>
-            <Label Grid.Row="0" Grid.Column="2" FontSize="Medium"
-                Text="เลือกวันที่สิ้นสุด :" VerticalOptions="Center" />
-            <DatePicker Grid.Row="0" Grid.Column="3" MinimumDate="{Binding DateStart}"
-                Date="{Binding DateEnd}" Format="dd/MM/yyyy" VerticalOptions="Center">
-                <DatePicker.Behaviors>
-                    <behaviors:EventToCommandBehavior EventName="DateSelected"
-                                                      Command="{Binding SearchCommand}" />
-                </DatePicker.Behaviors>
-            </DatePicker>
-            <!--<Picker Grid.Row="1" Grid.Column="0" VerticalOptions="CenterAndExpand"
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <!--<RowDefinition Height="*" />-->
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Padding="10,0,0,10">
+                    <dxe:DateEdit
+                        DisplayFormat="d"
+                        LabelText="วันที่เริ่ม"
+                        Style="{StaticResource InputPrimary}" />
+                    <dxe:DateEdit
+                        DisplayFormat="d"
+                        LabelText="วันที่สิ้นสุด"
+                        Style="{StaticResource InputPrimary}" />
+                </StackLayout>
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,10,0"
+                    FontSize="10"
+                    HeightRequest="35"
+                    HorizontalOptions="StartAndExpand"
+                    Style="{StaticResource ButtonInnovationPrimary}"
+                    Text="ค้นหา"
+                    VerticalOptions="Center" />
+                <!--<Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    FontSize="Medium"
+                    Text="เลือกวันที่เริ่ม :"
+                    VerticalOptions="Center" />
+                <DatePicker
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Date="{Binding DateStart}"
+                    Format="dd/MM/yyyy"
+                    MaximumDate="{Binding DateEnd}"
+                    VerticalOptions="Center">
+                    <DatePicker.Behaviors>
+                        <behaviors:EventToCommandBehavior Command="{Binding SearchCommand}" EventName="DateSelected" />
+                    </DatePicker.Behaviors>
+                </DatePicker>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    FontSize="Medium"
+                    Text="เลือกวันที่สิ้นสุด :"
+                    VerticalOptions="Center" />
+                <DatePicker
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    Date="{Binding DateEnd}"
+                    Format="dd/MM/yyyy"
+                    MinimumDate="{Binding DateStart}"
+                    VerticalOptions="Center">
+                    <DatePicker.Behaviors>
+                        <behaviors:EventToCommandBehavior Command="{Binding SearchCommand}" EventName="DateSelected" />
+                    </DatePicker.Behaviors>
+                </DatePicker>-->
+                <!--<Picker Grid.Row="1" Grid.Column="0" VerticalOptions="CenterAndExpand"
                 Title="เลือกเอกสาร" ItemsSource="{Binding lstTitle}" IsVisible="False" />
             <controls:RoundedEntry Grid.Row="1" Grid.Column ="1"  Grid.ColumnSpan="2"
                 Placeholder="" Style="{StaticResource RoundedEntryStyle}" Text="{Binding DocNo, Mode=TwoWay}" IsVisible="False"/>
             <Button Grid.Row="1" Grid.Column="3"
                     Text="Search" Command="{Binding SearchCommand}" IsVisible="False"/>-->
-        </Grid>
-        <Grid Grid.Row="1" Padding="5" BackgroundColor="White">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*" />
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="4*" />
-            </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" FontSize="Medium"
-                             VerticalOptions="Center"  Text="เลขที่เอกสาร" />
-            <Label Grid.Row="0" Grid.Column="1" FontSize="Medium"
-                             VerticalOptions="Center"   Text="วันที่ของถึงคลัง" />
-            <Label Grid.Row="0" Grid.Column="2" FontSize="Medium"
-                             VerticalOptions="Center"   Text="ที่มา" />
-        </Grid>
-        <ListView Grid.Row="2" 
-                  ItemsSource="{Binding ReceivePlan}" 
-                  CachingStrategy="RecycleElement"
-                  IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
-                  SeparatorVisibility="Default" HasUnevenRows="True">
-            <ListView.BackgroundColor>Gray</ListView.BackgroundColor>
-            <ListView.Behaviors>
-                <behaviors:EventToCommandBehavior 
-                    EventName="ItemTapped" 
-                    Command="{Binding ReceivePlanTappedCommand}" 
-                    EventArgsConverter="{StaticResource LocalItemTappedConverter}" >
-                </behaviors:EventToCommandBehavior>
-            </ListView.Behaviors>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell >
-                        <Grid  Padding="5" BackgroundColor="{Binding ColorCode,Converter={StaticResource LocalLabelColorConverter}}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="4*" />
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="4*" />
-                            </Grid.ColumnDefinitions>
-                            <StackLayout Grid.Column="0" Orientation="Horizontal">
-                                <Label Text="{Binding DocNoMobileShow}" VerticalOptions="Center"></Label>
+            </Grid>
+            <!--<Grid
+                Grid.Row="1"
+                Padding="5"
+                BackgroundColor="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="4*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    FontSize="Medium"
+                    Text="เลขที่เอกสาร"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontSize="Medium"
+                    Text="วันที่ของถึงคลัง"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    FontSize="Medium"
+                    Text="ที่มา"
+                    VerticalOptions="Center" />
+            </Grid>
+            <ListView
+                Grid.Row="2"
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="True"
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="{Binding IsRefreshing}"
+                ItemsSource="{Binding ReceivePlan}"
+                RefreshCommand="{Binding RefreshCommand}"
+                SeparatorVisibility="Default">
+                <ListView.BackgroundColor>Gray</ListView.BackgroundColor>
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior
+                        Command="{Binding ReceivePlanTappedCommand}"
+                        EventArgsConverter="{StaticResource LocalItemTappedConverter}"
+                        EventName="ItemTapped" />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="5" BackgroundColor="{Binding ColorCode, Converter={StaticResource LocalLabelColorConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                    <Label Text="{Binding DocNoMobileShow}" VerticalOptions="Center" />
+                                </StackLayout>
+                                <Label
+                                    Grid.Column="1"
+                                    Text="{Binding requestReceiveDate, StringFormat='{0:dd/MM/yyyy}'}"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Grid.Column="2"
+                                    Text="{Binding suppName}"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+            <Frame
+                Grid.Row="1"
+                Padding="0"
+                BackgroundColor="{StaticResource InnovationPrimary}"
+                BorderColor="Gray"
+                CornerRadius="0"
+                HeightRequest="200"
+                VerticalOptions="CenterAndExpand">
+                <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                    <Label
+                        Padding="5,0"
+                        HorizontalOptions="StartAndExpand"
+                        Text="เลขที่เอกสาร"
+                        TextColor="White" />
+                    <Label
+                        Padding="5,0"
+                        HorizontalOptions="EndAndExpand"
+                        Text="วันที่มาถึงคลัง"
+                        TextColor="White" />
+                </StackLayout>
+            </Frame>
+            <StackLayout Grid.Row="2">
+                <!--<dxcv:DXCollectionView
+                    IndicatorColor="Lime"
+                    IsPullToRefreshEnabled="{Binding IsRefreshing, Mode=TwoWay}"
+                    ItemsSource="{Binding ReceivePlan}"
+                    LoadMoreCommand="{Binding RefreshCommand}"
+                    PullToRefreshCommand="{Binding IsRefreshing}"
+                    SelectedItems="{Binding RefreshCommand}">
+                -->
+                <!--  ...  -->
+
+                <!--  Group items.  -->
+                <!--<dxcv:DXCollectionView.GroupDescription>
+                        <dxcv:GroupDescription FieldName="DocNoMobileShow" GroupInterval="Date" />
+                    </dxcv:DXCollectionView.GroupDescription>-->
+
+                <!--<dxcv:DXCollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                                <Label
+                                    Padding="5,0"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="เลขที่เอกสาร"
+                                    TextColor="White" />
+                                <Label
+                                    Padding="5,0"
+                                    HorizontalOptions="EndAndExpand"
+                                    Text="วันที่มาถึงคลัง"
+                                    TextColor="White" />
                             </StackLayout>
-                            <Label Grid.Column="1" Text="{Binding requestReceiveDate, StringFormat='{0:dd/MM/yyyy}'}"  VerticalOptions="Center" />
-                            <Label Grid.Column="2" Text="{Binding suppName}" VerticalOptions="Center"></Label>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+                        </DataTemplate>
+                    </dxcv:DXCollectionView.GroupHeaderTemplate>-->
+
+                <!--  Define the group header template.  -->
+                <!--
+
+                    <dxcv:DXCollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0,10">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ReceivePlanTappedCommand}" />
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="" VerticalOptions="Center" />
+                                <Label Text="จัดซื้อจาก PO : 231211-R001" VerticalOptions="Center" />
+                                <BoxView BackgroundColor="#ebebeb" HeightRequest="1" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </dxcv:DXCollectionView.ItemTemplate>
+                </dxcv:DXCollectionView>-->
+
+                <!--<dxcv:DXCollectionView x:Name="collectionView" ItemsSource="{Binding ReceivePlan}">
+                    <dxcv:DXCollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <dxcv:SwipeContainer>
+                                <dxcv:SwipeContainer.ItemView>
+                                    <StackLayout Margin="0,10">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ReceivePlanTappedCommand}" />
+                                        </StackLayout.GestureRecognizers>
+                                        <Label Text="{Binding suppName}" VerticalOptions="Center" />
+                                        <Label Text="จัดซื้อจาก PO : 231211-R001" VerticalOptions="Center" />
+                                        <BoxView BackgroundColor="#ebebeb" HeightRequest="1" />
+                                    </StackLayout>
+                                </dxcv:SwipeContainer.ItemView>
+
+                                <dxcv:SwipeContainer.StartSwipeItems>
+                                    <dxcv:SwipeItem
+                                        BackgroundColor="Green"
+                                        Caption="ดู"
+                                        Command="{Binding RefreshCommand}" />
+                                </dxcv:SwipeContainer.StartSwipeItems>
+
+                                <dxcv:SwipeContainer.EndSwipeItems>
+                                    <dxcv:SwipeItem
+                                        BackgroundColor="Red"
+                                        Caption="Delete"
+                                        Command="{Binding RefreshCommand}"
+                                        Image="deletetask" />
+                                </dxcv:SwipeContainer.EndSwipeItems>
+                            </dxcv:SwipeContainer>
+                        </DataTemplate>
+                    </dxcv:DXCollectionView.ItemTemplate>
+                </dxcv:DXCollectionView>-->
+
+                <dxcv:DXCollectionView
+                    x:Name="collectionView"
+                    IndicatorColor="Gray"
+                    IsLoadMoreEnabled="True"
+                    IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                    ItemsSource="{Binding ReceivePlan}"
+                    LoadMoreCommand="{Binding RefreshCommand}">
+                    <dxcv:DXCollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="16,14" ColumnSpacing="16">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ReceivingListViewModel}}, Path=ReceivePlanTappedCommand}"
+                                        CommandParameter="{Binding .}"
+                                        NumberOfTapsRequired="1" />
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout
+                                    Grid.Column="0"
+                                    Orientation="Vertical"
+                                    VerticalOptions="StartAndExpand">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        MaxLines="1"
+                                        Text="{Binding suppName}"
+                                        TextColor="#55575c" />
+                                    <Label
+                                        MaxLines="1"
+                                        Text="{Binding suppName}"
+                                        TextColor="#55575c" />
+                                    <Label
+                                        MaxLines="1"
+                                        Text="{Binding suppName}"
+                                        TextColor="#959aa0" />
+                                </StackLayout>
+                                <StackLayout
+                                    Grid.Column="1"
+                                    Orientation="Vertical"
+                                    VerticalOptions="StartAndExpand">
+                                    <Label
+                                        FontSize="Small"
+                                        Text="{Binding requestReceiveDate, StringFormat='{0:ddd MM/dd}'}"
+                                        TextColor="#959aa0" />
+                                    <Label
+                                        FontSize="Small"
+                                        Text="{Binding requestReceiveDate, StringFormat='{0:hh:mm tt}'}"
+                                        TextColor="#959aa0" />
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </dxcv:DXCollectionView.ItemTemplate>
+                </dxcv:DXCollectionView>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
 </ContentPage>

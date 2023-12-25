@@ -6,6 +6,7 @@ using Innovation.Mobile.App.Exceptions;
 using Innovation.Mobile.App.Extensions;
 using Innovation.Mobile.App.Models;
 using Innovation.Mobile.App.Repository.Interface.Service;
+using Innovation.Mobile.App.Service.Data;
 using Innovation.Mobile.App.Service.Genaral;
 using Innovation.Mobile.App.ViewModels.Base;
 using Innovation.Mobile.App.Views;
@@ -13,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -106,52 +108,31 @@ namespace Innovation.Mobile.App.ViewModels
             get => _receivePlan;
             set
             {
-                _receivePlan = value;
+                var LstTest = new ObservableCollection<MaterialReceivePlanMst>();
+                for (var I = 1; I <= 100; I++)
+                {
+                    LstTest.Add(value.FirstOrDefault());
+                }
+                _receivePlan = LstTest;
                 OnPropertyChanged();
             }
         }
 
         private async void OnGetReceivingPlan()
         {
-            //เลือกรูป
-            //var photoPicker = DependencyService.Get<IPhotoPickerService>();
-            //var photoStream = await photoPicker.GetImageStreamAsync();
-
-            //Print
-            //var printer = DependencyService.Get<IPrintService>();
-            //var result = printer.PrintImage(photoStream);
-
             try
             {
                 if (string.IsNullOrWhiteSpace(_docNo))
                 {
                     IsBusy = true;
-                    DependencyService.Get<ILoadPageAndroid>().ShowLoadingPageAsync();
-
-                    ReceivePlan = (await _materialAutoReceivingService.GetMaterialReceivePlanMstAsync(_dateStart, _dateEnd)).ToObservableCollection();
-                    //var mstsite = mst.Where(x => x.ownerSite == int.Parse(_settingsService.SiteIdSetting)).ToObservableCollection();
-                    DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
+                    var Data = await DependencyService.Get<ILoadingService>().Loading(_materialAutoReceivingService.GetMaterialReceivePlanMstAsync(_dateStart, _dateEnd), false, TimeoutLoading: 3000);
+                    ReceivePlan = Data.ToObservableCollection();
                     IsBusy = false;
                 }
-                else
-                {
-                    DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
-                    await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "การดาวน์โหลดข้อมูลผิดพลาด กรุณาติดต่อ ICT");
-
-                }
             }
-            catch (HttpRequestExceptionEx e)
+            catch (Exception ex)
             {
-                _loggingService.Error(e.Message);
-                DependencyService.Get<ILoadPageAndroid>().HideLoadingPage(); 
-                await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "การดาวน์โหลดข้อมูลผิดพลาด กรุณาติดต่อ ICT\r\nError Message: " + e.ToString());
-
-            }
-            catch (Exception e)
-            {
-                _loggingService.Error(e.ToString());
-                DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
-                await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "การดาวน์โหลดข้อมูลผิดพลาด กรุณาติดต่อ ICT\r\nError Message: " + e.ToString());
+                Console.WriteLine(ex);
             }
         }
 
@@ -188,26 +169,7 @@ namespace Innovation.Mobile.App.ViewModels
         {
             if (!IsBusy)
             {
-                try
-                {
-                    IsBusy = true;
-                    IsRefreshing = true;
-                    ReceivePlan = (await _materialAutoReceivingService.GetMaterialReceivePlanMstAsync(_dateStart, _dateEnd)).ToObservableCollection();
-                    IsRefreshing = false;
-                    IsBusy = false;
-                }
-                catch (HttpRequestExceptionEx e)
-                {
-                    _loggingService.Error(e.Message);
-                    DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
-                    await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "การดาวน์โหลดข้อมูลผิดพลาด กรุณาติดต่อ ICT\r\nError Message : " + e.Message);
-                }
-                catch (Exception e)
-                {
-                    _loggingService.Error(e.ToString());
-                    DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
-                    await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "การดาวน์โหลดข้อมูลผิดพลาด กรุณาติดต่อ ICT\r\nError Message: " + e.ToString());
-                }
+                OnGetReceivingPlan();
             }
         }
     }

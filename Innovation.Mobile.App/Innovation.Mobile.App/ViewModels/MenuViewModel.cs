@@ -93,7 +93,7 @@ namespace Innovation.Mobile.App.ViewModels
             _settingsService.PrintNameFormSetting = null;
             _settingsService.TokenSetting = null;
             _navigationService.ClearBackStack();
-            DependencyService.Get<ILoadingService>().Loading<Task>(_navigationService.NavigateToAsync<LoginViewModel>(), TimeoutLoading: 1000);
+            DependencyService.Get<ILoadingService>().Loading(() => { _navigationService.NavigateToAsync<LoginViewModel>(); }, false, TimeoutLoading: 1000);
         }
 
         public ObservableCollection<MainMenuItem> MenuItems
@@ -162,17 +162,20 @@ namespace Innovation.Mobile.App.ViewModels
         {
             try
             {
+
                 if (!string.IsNullOrEmpty(_settingsService.UserNameSetting) && !string.IsNullOrEmpty(_settingsService.PasswordSetting))
                 {
-                    IsBusy = true;
-                    var LoginVM = new LoginVm
+                    if (_settingsService.UserSetting == null)
                     {
-                        Username = _settingsService.UserNameSetting,
-                        Password = _settingsService.PasswordSetting,
-                    };
-
-                    _settingsService.UserSetting = await _authenticationService.CheckPermissionAsync(LoginVM);
-                    IsBusy = false;
+                        IsBusy = true;
+                        var LoginVM = new LoginVm
+                        {
+                            Username = _settingsService.UserNameSetting,
+                            Password = _settingsService.PasswordSetting,
+                        };
+                        _settingsService.UserSetting = await _authenticationService.CheckPermissionAsync(LoginVM);
+                        IsBusy = false;
+                    }
                 }
                 else
                 {

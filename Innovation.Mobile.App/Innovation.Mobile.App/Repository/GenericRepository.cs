@@ -31,17 +31,17 @@ namespace Innovation.Mobile.App.Repository
 
         private HttpClient CreateHttpClient()
         {
-            var httpClient = new HttpClient { BaseAddress = new Uri("http://192.168.32.14:5001/") };
+            var httpClient = new HttpClient { BaseAddress = new Uri(_settingsService.BaseApiUrlBySite) };
             httpClient.Timeout = TimeSpan.FromSeconds(30);
             httpClient.DefaultRequestHeaders.ConnectionClose = true;
             if (!string.IsNullOrEmpty(_settingsService.TokenSetting))
             {
                 httpClient.DefaultRequestHeaders.Add("InhouseAPIKey", _settingsService.TokenSetting);
             }
-            if (!string.IsNullOrEmpty(_settingsService.SiteIdSetting))
-            {
-                httpClient.DefaultRequestHeaders.Add("SiteID", _settingsService.SiteIdSetting);
-            }
+            //if (!string.IsNullOrEmpty(_settingsService.SiteIdSetting))
+            //{
+            //    httpClient.DefaultRequestHeaders.Add("SiteID", _settingsService.SiteIdSetting);
+            //}
 
             return httpClient;
         }

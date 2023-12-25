@@ -23,7 +23,9 @@
     <PackageReference Include="akavache" Version="5.0.0" />
     <PackageReference Include="Autofac" Version="4.6.2" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.0.11" />
-    <PackageReference Include="DevExpress.XamarinForms.Editors" Version="20.1.7" />
+    <PackageReference Include="DevExpress.XamarinForms.CollectionView" Version="21.2.11" />
+    <PackageReference Include="DevExpress.XamarinForms.Editors" Version="21.2.11" />
+    <PackageReference Include="DevExpress.XamarinForms.Grid" Version="21.2.11" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="NLog" Version="5.2.4" />
     <PackageReference Include="Polly" Version="5.9.0" />
