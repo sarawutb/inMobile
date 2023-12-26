@@ -25,7 +25,7 @@
 
             <OnPlatform x:Key="XSmallFontSize" x:TypeArguments="x:Double">
                 <On Platform="iOS" Value="11" />
-                <On Platform="Android, UWP, WinRT, WinPhone" Value="9" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="3" />
             </OnPlatform>
 
             <Color x:Key="BethanyPurple">#a594c1</Color>
@@ -45,6 +45,7 @@
             <Color x:Key="Secondary">#6B757D</Color>
             <Color x:Key="Light">#F8FAFB</Color>
             <Color x:Key="White">#FFFFFF</Color>
+            <Color x:Key="Gray">#E5E5E5</Color>
             <Color x:Key="Transparent">#80000000</Color>
 
             <Style x:Key="SizeLabel" TargetType="Label">
@@ -53,6 +54,16 @@
 
             <Style x:Key="SizeContent" TargetType="Label">
                 <Setter Property="FontSize" Value="15" />
+            </Style>
+
+            <Style x:Key="SizeTitieLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style x:Key="SizeContentLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontAttributes" Value="None" />
             </Style>
 
             <Style x:Key="InputPrimary" TargetType="dxe:TextEdit">

@@ -11,10 +11,12 @@ using Innovation.Mobile.App.Service.Genaral;
 using Innovation.Mobile.App.ViewModels.Base;
 using Innovation.Mobile.App.Views;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Threading.Tasks;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -29,7 +31,7 @@ namespace Innovation.Mobile.App.ViewModels
         private List<string> _lstTitle;
         private string _docNo;
         private bool _isRefreshing;
-        private ObservableCollection<MaterialReceivePlanMst> _receivePlan;
+        private ObservableCollection<MaterialReceivePlanMst> _receivePlan = new ObservableCollection<MaterialReceivePlanMst>();
         public ReceivingListViewModel(IConnectionService connectionService,
             INavigationService navigationService, IDialogService dialogService,
             IMaterialAutoReceivingService materialAutoReceivingService, ISettingsService settingsService,
@@ -62,7 +64,7 @@ namespace Innovation.Mobile.App.ViewModels
             get => _dateStart;
             set
             {
-                _dateStart = value;
+                _dateStart = value.Date;
                 OnPropertyChanged();
             }
         }
@@ -71,7 +73,7 @@ namespace Innovation.Mobile.App.ViewModels
             get => _dateEnd;
             set
             {
-                _dateEnd = value;
+                _dateEnd = value.Date;
                 OnPropertyChanged();
             }
         }
@@ -108,12 +110,15 @@ namespace Innovation.Mobile.App.ViewModels
             get => _receivePlan;
             set
             {
-                var LstTest = new ObservableCollection<MaterialReceivePlanMst>();
-                for (var I = 1; I <= 100; I++)
+                if (value.Count > 0)
                 {
-                    LstTest.Add(value.FirstOrDefault());
+                    var LstTest = new ObservableCollection<MaterialReceivePlanMst>();
+                    for (var I = 1; I <= 20; I++)
+                    {
+                        LstTest.Add(value.FirstOrDefault());
+                    }
+                    _receivePlan = LstTest;
                 }
-                _receivePlan = LstTest;
                 OnPropertyChanged();
             }
         }
@@ -124,16 +129,31 @@ namespace Innovation.Mobile.App.ViewModels
             {
                 if (string.IsNullOrWhiteSpace(_docNo))
                 {
-                    IsBusy = true;
-                    var Data = await DependencyService.Get<ILoadingService>().Loading(_materialAutoReceivingService.GetMaterialReceivePlanMstAsync(_dateStart, _dateEnd), false, TimeoutLoading: 3000);
-                    ReceivePlan = Data.ToObservableCollection();
+                    ReceivePlan.Clear();
                     IsBusy = false;
+                    var Data = await DependencyService.Get<ILoadingService>().Loading(GetMaterialReceivePlanMstx(), false);
+                    ReceivePlan = Data.ToObservableCollection();
+                    IsBusy = true;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
+        }
+
+        async Task CheckReceivePlanEmpty() {
+            if (ReceivePlan.Count < 1)
+            {
+              await  _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Info, "ไม่พบรายการ!");
+            }
+        }
+
+        public async Task<IEnumerable<MaterialReceivePlanMst>> GetMaterialReceivePlanMstx()
+        {
+            var Data = await _materialAutoReceivingService.GetMaterialReceivePlanMstAsync(_dateStart, _dateEnd);
+            await CheckReceivePlanEmpty();
+            return Data;
         }
 
         private void ReceivePlanTapped(MaterialReceivePlanMst selectReceivePlan)
@@ -167,10 +187,11 @@ namespace Innovation.Mobile.App.ViewModels
         }
         private async void OnRefresh(object obj)
         {
-            if (!IsBusy)
-            {
-                OnGetReceivingPlan();
-            }
+            ReceivePlan.Clear();
+            IsBusy = false;
+            var Data = await GetMaterialReceivePlanMstx();
+            ReceivePlan = Data.ToObservableCollection();
+            IsBusy = true;
         }
     }
 }

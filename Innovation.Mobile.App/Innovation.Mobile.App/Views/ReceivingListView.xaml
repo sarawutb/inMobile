@@ -14,45 +14,50 @@
     Title="ราการรับเข้าวัตถุดิบ"
     utility:ViewModelLocator.AutoWireViewModel="True">
     <StackLayout>
-        <Grid RowSpacing="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="35" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+        <ScrollView Orientation="Vertical" VerticalScrollBarVisibility="Never">
+            <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
-                    <!--<RowDefinition Height="*" />-->
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <StackLayout
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Padding="10,0,0,10">
-                    <dxe:DateEdit
-                        DisplayFormat="d"
-                        LabelText="วันที่เริ่ม"
-                        Style="{StaticResource InputPrimary}" />
-                    <dxe:DateEdit
-                        DisplayFormat="d"
-                        LabelText="วันที่สิ้นสุด"
-                        Style="{StaticResource InputPrimary}" />
-                </StackLayout>
-                <Button
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="0,0,10,0"
-                    FontSize="10"
-                    HeightRequest="35"
-                    HorizontalOptions="StartAndExpand"
-                    Style="{StaticResource ButtonInnovationPrimary}"
-                    Text="ค้นหา"
-                    VerticalOptions="Center" />
-                <!--<Label
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <!--<RowDefinition Height="*" />-->
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Padding="10,0,0,10">
+                        <dxe:DateEdit
+                            Date="{Binding DateStart}"
+                            DisplayFormat="dd/MM/yyyy"
+                            LabelText="วันที่เริ่ม"
+                            MaxDate="{Binding DateEnd}"
+                            PlaceholderText="วันที่เริ่ม"
+                            Style="{StaticResource InputPrimary}" />
+                        <dxe:DateEdit
+                            Date="{Binding DateEnd}"
+                            DisplayFormat="dd/MM/yyyy"
+                            LabelText="วันที่สิ้นสุด"
+                            Style="{StaticResource InputPrimary}" />
+                    </StackLayout>
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="0,0,10,5"
+                        Command="{Binding SearchCommand}"
+                        FontSize="10"
+                        HeightRequest="90"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource ButtonInnovationPrimary}"
+                        Text="ค้นหา"
+                        VerticalOptions="CenterAndExpand" />
+                    <!--<Label
                     Grid.Row="0"
                     Grid.Column="0"
                     FontSize="Medium"
@@ -86,14 +91,14 @@
                         <behaviors:EventToCommandBehavior Command="{Binding SearchCommand}" EventName="DateSelected" />
                     </DatePicker.Behaviors>
                 </DatePicker>-->
-                <!--<Picker Grid.Row="1" Grid.Column="0" VerticalOptions="CenterAndExpand"
+                    <!--<Picker Grid.Row="1" Grid.Column="0" VerticalOptions="CenterAndExpand"
                 Title="เลือกเอกสาร" ItemsSource="{Binding lstTitle}" IsVisible="False" />
             <controls:RoundedEntry Grid.Row="1" Grid.Column ="1"  Grid.ColumnSpan="2"
                 Placeholder="" Style="{StaticResource RoundedEntryStyle}" Text="{Binding DocNo, Mode=TwoWay}" IsVisible="False"/>
             <Button Grid.Row="1" Grid.Column="3"
                     Text="Search" Command="{Binding SearchCommand}" IsVisible="False"/>-->
-            </Grid>
-            <!--<Grid
+                </Grid>
+                <!--<Grid
                 Grid.Row="1"
                 Padding="5"
                 BackgroundColor="White">
@@ -162,7 +167,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>-->
-            <Frame
+                <!--<Frame
                 Grid.Row="1"
                 Padding="0"
                 BackgroundColor="{StaticResource InnovationPrimary}"
@@ -174,32 +179,32 @@
                     <Label
                         Padding="5,0"
                         HorizontalOptions="StartAndExpand"
-                        Text="เลขที่เอกสาร"
+                        Text="ชื่อรายการ"
                         TextColor="White" />
                     <Label
                         Padding="5,0"
-                        HorizontalOptions="EndAndExpand"
-                        Text="วันที่มาถึงคลัง"
+                        HorizontalOptions="StartAndExpand"
+                        Text="รายละเอียด"
                         TextColor="White" />
                 </StackLayout>
-            </Frame>
-            <StackLayout Grid.Row="2">
-                <!--<dxcv:DXCollectionView
+            </Frame>-->
+                <StackLayout Grid.Row="1">
+                    <!--<dxcv:DXCollectionView
                     IndicatorColor="Lime"
                     IsPullToRefreshEnabled="{Binding IsRefreshing, Mode=TwoWay}"
                     ItemsSource="{Binding ReceivePlan}"
                     LoadMoreCommand="{Binding RefreshCommand}"
                     PullToRefreshCommand="{Binding IsRefreshing}"
                     SelectedItems="{Binding RefreshCommand}">
-                -->
-                <!--  ...  -->
+                    -->
+                    <!--  ...  -->
 
-                <!--  Group items.  -->
-                <!--<dxcv:DXCollectionView.GroupDescription>
+                    <!--  Group items.  -->
+                    <!--<dxcv:DXCollectionView.GroupDescription>
                         <dxcv:GroupDescription FieldName="DocNoMobileShow" GroupInterval="Date" />
                     </dxcv:DXCollectionView.GroupDescription>-->
 
-                <!--<dxcv:DXCollectionView.GroupHeaderTemplate>
+                    <!--<dxcv:DXCollectionView.GroupHeaderTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                                 <Label
@@ -216,8 +221,8 @@
                         </DataTemplate>
                     </dxcv:DXCollectionView.GroupHeaderTemplate>-->
 
-                <!--  Define the group header template.  -->
-                <!--
+                    <!--  Define the group header template.  -->
+                    <!--
 
                     <dxcv:DXCollectionView.ItemTemplate>
                         <DataTemplate>
@@ -233,7 +238,7 @@
                     </dxcv:DXCollectionView.ItemTemplate>
                 </dxcv:DXCollectionView>-->
 
-                <!--<dxcv:DXCollectionView x:Name="collectionView" ItemsSource="{Binding ReceivePlan}">
+                    <!--<dxcv:DXCollectionView x:Name="collectionView" ItemsSource="{Binding ReceivePlan}">
                     <dxcv:DXCollectionView.ItemTemplate>
                         <DataTemplate>
                             <dxcv:SwipeContainer>
@@ -266,63 +271,97 @@
                         </DataTemplate>
                     </dxcv:DXCollectionView.ItemTemplate>
                 </dxcv:DXCollectionView>-->
-
-                <dxcv:DXCollectionView
-                    x:Name="collectionView"
-                    IndicatorColor="Gray"
-                    IsLoadMoreEnabled="True"
-                    IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
-                    ItemsSource="{Binding ReceivePlan}"
-                    LoadMoreCommand="{Binding RefreshCommand}">
-                    <dxcv:DXCollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="16,14" ColumnSpacing="16">
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ReceivingListViewModel}}, Path=ReceivePlanTappedCommand}"
-                                        CommandParameter="{Binding .}"
-                                        NumberOfTapsRequired="1" />
-                                </Grid.GestureRecognizers>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <StackLayout
-                                    Grid.Column="0"
-                                    Orientation="Vertical"
-                                    VerticalOptions="StartAndExpand">
-                                    <Label
-                                        FontAttributes="Bold"
-                                        MaxLines="1"
-                                        Text="{Binding suppName}"
-                                        TextColor="#55575c" />
-                                    <Label
-                                        MaxLines="1"
-                                        Text="{Binding suppName}"
-                                        TextColor="#55575c" />
-                                    <Label
-                                        MaxLines="1"
-                                        Text="{Binding suppName}"
-                                        TextColor="#959aa0" />
-                                </StackLayout>
-                                <StackLayout
-                                    Grid.Column="1"
-                                    Orientation="Vertical"
-                                    VerticalOptions="StartAndExpand">
-                                    <Label
-                                        FontSize="Small"
-                                        Text="{Binding requestReceiveDate, StringFormat='{0:ddd MM/dd}'}"
-                                        TextColor="#959aa0" />
-                                    <Label
-                                        FontSize="Small"
-                                        Text="{Binding requestReceiveDate, StringFormat='{0:hh:mm tt}'}"
-                                        TextColor="#959aa0" />
-                                </StackLayout>
-                            </Grid>
-                        </DataTemplate>
-                    </dxcv:DXCollectionView.ItemTemplate>
-                </dxcv:DXCollectionView>
-            </StackLayout>
-        </Grid>
+                    <dxcv:DXCollectionView
+                        x:Name="collectionView"
+                        IndicatorColor="White"
+                        IsLoadMoreEnabled="False"
+                        IsPullToRefreshEnabled="True"
+                        IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+                        ItemsSource="{Binding ReceivePlan}"
+                        LoadMoreCommand="{Binding RefreshCommand}"
+                        PullToRefreshCommand="{Binding RefreshCommand}">
+                        <dxcv:DXCollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    Margin="16,5"
+                                    Padding="5,5"
+                                    BackgroundColor="{StaticResource Gray}"
+                                    BorderColor="{StaticResource Success}"
+                                    CornerRadius="2"
+                                    HorizontalOptions="CenterAndExpand"
+                                    MinimumHeightRequest="50"
+                                    VerticalOptions="Center">
+                                    <Grid Padding="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Column="0">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <StackLayout Grid.Row="0">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Style="{StaticResource SizeTitieLabel}" Text="เลขที่เอกสาร : " />
+                                                        <Label Style="{StaticResource SizeContentLabel}" Text="{Binding DocNoMobileShow}" />
+                                                    </StackLayout>
+                                                    <BoxView
+                                                        BackgroundColor="Black"
+                                                        HeightRequest="0.5"
+                                                        VerticalOptions="End" />
+                                                </StackLayout>
+                                                <StackLayout Grid.Row="1">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Style="{StaticResource SizeTitieLabel}" Text="หมายเหตุ : " />
+                                                        <Label Style="{StaticResource SizeContentLabel}" Text="{Binding DocNoMobileShow}" />
+                                                    </StackLayout>
+                                                    <BoxView
+                                                        BackgroundColor="Black"
+                                                        HeightRequest="0.5"
+                                                        VerticalOptions="End" />
+                                                </StackLayout>
+                                                <StackLayout Grid.Row="2">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Style="{StaticResource SizeTitieLabel}" Text="จัดซื้อ PO : " />
+                                                        <Label Style="{StaticResource SizeContentLabel}" Text="PO2312345" />
+                                                    </StackLayout>
+                                                    <BoxView
+                                                        BackgroundColor="Black"
+                                                        HeightRequest="0.5"
+                                                        VerticalOptions="End" />
+                                                </StackLayout>
+                                                <StackLayout Grid.Row="3">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Style="{StaticResource SizeTitieLabel}" Text="วันที่ของมาถึงคลัง : " />
+                                                        <Label Style="{StaticResource SizeContentLabel}" Text="20-12-2023" />
+                                                    </StackLayout>
+                                                    <BoxView
+                                                        BackgroundColor="Black"
+                                                        HeightRequest="0.5"
+                                                        VerticalOptions="End" />
+                                                </StackLayout>
+                                                <StackLayout Grid.Row="4">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Style="{StaticResource SizeTitieLabel}" Text="สถานะ : " />
+                                                        <Label
+                                                            Style="{StaticResource SizeContentLabel}"
+                                                            Text="รอดำเนินการ"
+                                                            TextColor="{StaticResource Success}" />
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </dxcv:DXCollectionView.ItemTemplate>
+                    </dxcv:DXCollectionView>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </StackLayout>
 </ContentPage>

@@ -50,6 +50,10 @@
               "target": "Package",
               "version": "[7.0.1, )"
             },
+            "DevExpress.XamarinForms.Editors": {
+              "target": "Package",
+              "version": "[21.2.11, )"
+            },
             "Plugin.CurrentActivity": {
               "target": "Package",
               "version": "[2.1.0.1, )"

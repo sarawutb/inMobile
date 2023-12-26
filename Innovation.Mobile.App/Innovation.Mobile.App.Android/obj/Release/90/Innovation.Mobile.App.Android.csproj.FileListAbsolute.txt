@@ -1,0 +1,3 @@
+C:\M\Innovation.Mobile.App\Innovation.Mobile.App.Android\obj\Release\90\MonoAndroid,Version=v9.0.AssemblyAttributes.cs
+C:\M\Innovation.Mobile.App\Innovation.Mobile.App.Android\obj\Release\90\build.props
+C:\M\Innovation.Mobile.App\Innovation.Mobile.App.Android\obj\Release\90\adb.props

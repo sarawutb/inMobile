@@ -48,8 +48,8 @@ namespace Innovation.Mobile.App.Bootstrap
 
             //services - general
             builder.RegisterType<ConnectionService>().As<IConnectionService>().SingleInstance();
-            builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
-            builder.RegisterType<DialogService>().As<IDialogService>().SingleInstance();
+            builder.RegisterType<NavigationService>().As<INavigationService>();
+            builder.RegisterType<DialogService>().As<IDialogService>();
             //builder.RegisterType<PhoneService>().As<IPhoneService>();
             builder.RegisterType<SettingsService>().As<ISettingsService>().SingleInstance();
             builder.RegisterType<LoggingService>().As<ILoggingService>().SingleInstance();

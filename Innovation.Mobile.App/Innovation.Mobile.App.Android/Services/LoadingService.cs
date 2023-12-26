@@ -56,7 +56,7 @@ namespace Innovation.Mobile.App.Service
                 //    };
                 //    Result = loadingAction.Invoke();
                 //});
-                Result =  loadingAction.Result;
+                Result = await  loadingAction;
                 await Task.Delay(TimeoutLoading);
                 await DependencyService.Get<LoadingView>().Hide();
                

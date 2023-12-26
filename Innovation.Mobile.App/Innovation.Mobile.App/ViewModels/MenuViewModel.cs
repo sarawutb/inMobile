@@ -78,11 +78,11 @@ namespace Innovation.Mobile.App.ViewModels
         {
             _dialogService.DialogYesOrNo(MessagingConstants.NotifySystem, "แน่ใจว่าต้องการออกจากระบบ ?", () =>
             {
-                UserLogout();
+                UserLogoutAsync();
             });
         }
 
-        private void UserLogout()
+        private async Task UserLogoutAsync()
         {
             _settingsService.UserIdSetting = null;
             _settingsService.UserNameSetting = null;
@@ -92,8 +92,13 @@ namespace Innovation.Mobile.App.ViewModels
             _settingsService.PrintPortFormSetting = null;
             _settingsService.PrintNameFormSetting = null;
             _settingsService.TokenSetting = null;
-            _navigationService.ClearBackStack();
-            DependencyService.Get<ILoadingService>().Loading(() => { _navigationService.NavigateToAsync<LoginViewModel>(); }, false, TimeoutLoading: 1000);
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                _navigationService.ClearBackStack();
+            });
+
+            await DependencyService.Get<ILoadingService>().Loading(() => { }, false, TimeoutLoading: 250);
+            await _navigationService.NavigateToAsync<LoginViewModel>();
         }
 
         public ObservableCollection<MainMenuItem> MenuItems
@@ -179,7 +184,7 @@ namespace Innovation.Mobile.App.ViewModels
                 }
                 else
                 {
-                    UserLogout();
+                    UserLogoutAsync();
                 }
             }
             catch (HttpRequestExceptionEx e)

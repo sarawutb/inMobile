@@ -1,7 +1,11 @@
+C:\M\Innovation.Mobile.App\Innovation.Mobile.App\bin\Release\netstandard2.0\Innovation.Mobile.App.deps.json
+C:\M\Innovation.Mobile.App\Innovation.Mobile.App\bin\Release\netstandard2.0\Innovation.Mobile.App.dll
+C:\M\Innovation.Mobile.App\Innovation.Mobile.App\bin\Release\netstandard2.0\Innovation.Mobile.App.pdb
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Innovation.Mobile.App.csproj.AssemblyReference.cache
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Innovation.Mobile.App.GeneratedMSBuildEditorConfig.editorconfig
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\App.xaml.g.cs
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Templates\CardViewTemplate.xaml.g.cs
+C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Templates\ListMenuItemTemplate.xaml.g.cs
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Templates\LoadingPage.xaml.g.cs
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Templates\MenuItemTemplate.xaml.g.cs
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Templates\QAViewTemplate.xaml.g.cs
@@ -32,10 +36,6 @@ C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\View
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Innovation.Mobile.App.AssemblyInfoInputs.cache
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Innovation.Mobile.App.AssemblyInfo.cs
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Innovation.Mobile.App.csproj.CoreCompileInputs.cache
+C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\XamlC.stamp
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Innovation.Mobile.App.dll
 C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Innovation.Mobile.App.pdb
-C:\M\Innovation.Mobile.App\Innovation.Mobile.App\bin\Release\netstandard2.0\Innovation.Mobile.App.deps.json
-C:\M\Innovation.Mobile.App\Innovation.Mobile.App\bin\Release\netstandard2.0\Innovation.Mobile.App.dll
-C:\M\Innovation.Mobile.App\Innovation.Mobile.App\bin\Release\netstandard2.0\Innovation.Mobile.App.pdb
-C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\XamlC.stamp
-C:\M\Innovation.Mobile.App\Innovation.Mobile.App\obj\Release\netstandard2.0\Templates\ListMenuItemTemplate.xaml.g.cs

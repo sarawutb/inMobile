@@ -1,0 +1,111 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZSXoYqBqK6XY/7En3PHTheMgPN1IGZKu7eyfM8hw6XpMAf2mLPpyO1413LQxGGz3x7bzP83TDMj7AgeGLbp4oQ==",
+  "success": true,
+  "projectFilePath": "C:\\M\\Innovation.Mobile.App\\Innovation.Mobile.App\\Innovation.Mobile.App.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sarawutb\\.nuget\\packages\\acr.userdialogs\\7.0.1\\acr.userdialogs.7.0.1.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\akavache\\5.0.0\\akavache.5.0.0.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\akavache.core\\5.0.0\\akavache.core.5.0.0.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\akavache.sqlite3\\5.0.0\\akavache.sqlite3.5.0.0.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\autofac\\4.6.2\\autofac.4.6.2.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\com.airbnb.xamarin.forms.lottie\\4.0.11\\com.airbnb.xamarin.forms.lottie.4.0.11.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\devexpress.xamarinforms.collectionview\\21.2.11\\devexpress.xamarinforms.collectionview.21.2.11.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\devexpress.xamarinforms.core\\21.2.11\\devexpress.xamarinforms.core.21.2.11.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\devexpress.xamarinforms.editors\\21.2.11\\devexpress.xamarinforms.editors.21.2.11.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\devexpress.xamarinforms.grid\\21.2.11\\devexpress.xamarinforms.grid.21.2.11.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.0.1\\microsoft.netcore.targets.1.0.1.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\nlog\\5.2.4\\nlog.5.2.4.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\polly\\5.9.0\\polly.5.9.0.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\rx-core\\2.2.5\\rx-core.2.2.5.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\rx-interfaces\\2.2.5\\rx-interfaces.2.2.5.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\rx-linq\\2.2.5\\rx-linq.2.2.5.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\rx-main\\2.2.5\\rx-main.2.2.5.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\rx-platformservices\\2.2.5\\rx-platformservices.2.2.5.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\splat\\1.6.0\\splat.1.6.0.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\1.1.0\\sqlitepclraw.bundle_e_sqlite3.1.1.0.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\sqlitepclraw.core\\1.1.0\\sqlitepclraw.core.1.1.0.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\system.componentmodel\\4.0.1\\system.componentmodel.4.0.1.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime\\4.1.0\\system.runtime.4.1.0.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\xam.plugin.connectivity\\3.1.1\\xam.plugin.connectivity.3.1.1.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\xam.plugins.settings\\3.1.1\\xam.plugins.settings.3.1.1.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\xamarin.essentials\\1.6.0\\xamarin.essentials.1.6.0.nupkg.sha512",
+    "C:\\Users\\sarawutb\\.nuget\\packages\\xamarin.forms\\5.0.0.2578\\xamarin.forms.5.0.0.2578.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'akavache.core 5.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework '.NETStandard,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "akavache.core",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'akavache.sqlite3 5.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework '.NETStandard,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "akavache.sqlite3",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Rx-Core 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework '.NETStandard,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Rx-Core",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Rx-Interfaces 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework '.NETStandard,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Rx-Interfaces",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Rx-Linq 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework '.NETStandard,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Rx-Linq",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Rx-PlatformServices 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework '.NETStandard,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Rx-PlatformServices",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Splat 1.6.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework '.NETStandard,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Splat",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    }
+  ]
+}

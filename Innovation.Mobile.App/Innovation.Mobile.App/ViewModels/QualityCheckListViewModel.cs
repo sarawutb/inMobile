@@ -139,52 +139,52 @@ namespace Innovation.Mobile.App.ViewModels
 
         private async void OnGetReceivingPlan()
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(_docNo))
-                {
-                    IsBusy = true;
-                    DependencyService.Get<ILoadPageAndroid>().ShowLoadingPageAsync();
-                    if (!string.IsNullOrEmpty(Barcode))
-                    {
-                        Barcode = string.Empty;
-                    }
-                    ReceivePlan = (await _materialAutoReceivingService.GetMaterialReceivePlanMstQAAsync(_dateStart, _dateEnd)).ToObservableCollection();
-                    DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
-                    IsBusy = false;
-                    //foreach (var item in ReceivePlan)
-                    //{
-                    //    if(item.receivePlanMstStatus == 3)
-                    //    {
-                    //        item.colorName = "Green";
-                    //        item.ColorCode = "#00FF04";
-                    //    }
-                    //    else
-                    //    {
-                    //        item.ColorCode = "#FFFFFF";
-                    //        item.colorName = "White";
-                    //    }
-                    //}
-                }
-                else
-                {
-                    DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
-                    await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "การดาวน์โหลดข้อมูลผิดพลาด กรุณาติดต่อ ICT");
+            //try
+            //{
+            //    if (string.IsNullOrWhiteSpace(_docNo))
+            //    {
+            //        IsBusy = true;
+            //        DependencyService.Get<ILoadPageAndroid>().ShowLoadingPageAsync();
+            //        if (!string.IsNullOrEmpty(Barcode))
+            //        {
+            //            Barcode = string.Empty;
+            //        }
+            //        ReceivePlan = (await _materialAutoReceivingService.GetMaterialReceivePlanMstQAAsync(_dateStart, _dateEnd)).ToObservableCollection();
+            //        DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
+            //        IsBusy = false;
+            //        //foreach (var item in ReceivePlan)
+            //        //{
+            //        //    if(item.receivePlanMstStatus == 3)
+            //        //    {
+            //        //        item.colorName = "Green";
+            //        //        item.ColorCode = "#00FF04";
+            //        //    }
+            //        //    else
+            //        //    {
+            //        //        item.ColorCode = "#FFFFFF";
+            //        //        item.colorName = "White";
+            //        //    }
+            //        //}
+            //    }
+            //    else
+            //    {
+            //        DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
+            //        await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "การดาวน์โหลดข้อมูลผิดพลาด กรุณาติดต่อ ICT");
 
-                }
-            }
-            catch (HttpRequestExceptionEx e)
-            {
-                DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
-                _loggingService.Error(e.Message);
-                await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "การดาวน์โหลดข้อมูลผิดพลาด กรุณาติดต่อ ICT\r\nError Message : " + e.Message);
-            }
-            catch (Exception e)
-            {
-                DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
-                _loggingService.Error(e.ToString());
-                await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "การดาวน์โหลดข้อมูลผิดพลาด กรุณาติดต่อ ICT\r\nError Message : " + e.ToString());
-            }
+            //    }
+            //}
+            //catch (HttpRequestExceptionEx e)
+            //{
+            //    DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
+            //    _loggingService.Error(e.Message);
+            //    await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "การดาวน์โหลดข้อมูลผิดพลาด กรุณาติดต่อ ICT\r\nError Message : " + e.Message);
+            //}
+            //catch (Exception e)
+            //{
+            //    DependencyService.Get<ILoadPageAndroid>().HideLoadingPage();
+            //    _loggingService.Error(e.ToString());
+            //    await _dialogService.DialogOK(MessagingConstants.NotifySystem, IconDialog.Error, "การดาวน์โหลดข้อมูลผิดพลาด กรุณาติดต่อ ICT\r\nError Message : " + e.ToString());
+            //}
         }
 
         private void OnCheckPlanTapped(MaterialReceivePlanMst selectReceivePlan)

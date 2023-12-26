@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using Innovation.Mobile.App.Constants;
 using Innovation.Mobile.App.Contracts.Service.Genaral;
 using Innovation.Mobile.App.ViewModels;
 using Innovation.Mobile.App.Views.Widget;
@@ -20,7 +21,7 @@ namespace Innovation.Mobile.App.Service.Genaral
 
         public async Task<SiteAndPrinter> DialogSiteAndPrinter(bool isRefresh = false)
         {
-           return await DependencyService.Get<DialogSiteAndPrinter>().Show(isRefresh);
+            return await DependencyService.Get<DialogSiteAndPrinter>().Show(isRefresh);
         }
         public async Task DialogError(string Msg)
         {
@@ -35,7 +36,7 @@ namespace Innovation.Mobile.App.Service.Genaral
             await DependencyService.Get<DialogError>().DialogErrorMsg(Msg);
         }
 
-        public async Task DialogOK(string Title, IconDialog iconDialog, string Content, Action action, bool IsIcon = true)
+        public async Task DialogOK(string Title = MessagingConstants.NotifySystem, IconDialog iconDialog = IconDialog.Info, string Content = null, Action action = null, bool IsIcon = true)
         {
             try
             {

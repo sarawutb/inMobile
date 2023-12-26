@@ -36,7 +36,7 @@
                 HasShadow="true">
                 <StackLayout Margin="0,20" Padding="0,1">
                     <StackLayout
-                        HorizontalOptions="Center"
+                        HorizontalOptions="FillAndExpand"
                         Orientation="Vertical"
                         VerticalOptions="EndAndExpand">
                         <BoxView HeightRequest="10" />

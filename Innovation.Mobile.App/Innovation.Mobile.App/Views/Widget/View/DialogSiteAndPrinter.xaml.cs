@@ -38,9 +38,26 @@ namespace Innovation.Mobile.App.Views.Widget.View
         {
             return await _viewModel.Show(this, isRefresh);
         }
+
+        public async void IsRefresh(bool isRefresh)
+        {
+            if (isRefresh)
+            {
+                _viewModel.SiteProfile = null;
+                _viewModel.PrinterProfile = null;
+                //InitializePage();
+            }
+            else
+            {
+                if (_settingsService != null)
+                {
+                    _viewModel.SetCurrentSite();
+                    //_viewModel.OnSelectSite(_settingsService.SiteIdSetting);
+                }
+            }
+        }
         protected override bool OnBackButtonPressed()
         {
-            InitializePage();
             CurrentApplication.MainPage.Navigation.PopModalAsync(false);
             return true;
         }

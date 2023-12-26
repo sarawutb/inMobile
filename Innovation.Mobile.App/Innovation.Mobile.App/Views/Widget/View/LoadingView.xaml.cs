@@ -33,10 +33,10 @@ namespace Innovation.Mobile.App.Views.Widget
 
         public async Task Show(bool IsClose = false)
         {
-            IsCloseLoading = IsClose;
+            IsCloseLoading = true;
             if (Application.Current.MainPage != null)
             {
-                var Loading = Application.Current.MainPage.Navigation.ModalStack.FirstOrDefault(x => x == this);
+                var Loading = Application.Current.MainPage.Navigation.ModalStack.LastOrDefault(x => x == this);
                 if (Loading == null)
                 {
                     await Application.Current.MainPage.Navigation.PushModalAsync(this, false);
@@ -48,7 +48,7 @@ namespace Innovation.Mobile.App.Views.Widget
         {
             if (Application.Current.MainPage != null)
             {
-                var Loading = Application.Current.MainPage.Navigation.ModalStack.FirstOrDefault(x => x == this);
+                var Loading = Application.Current.MainPage.Navigation.ModalStack.LastOrDefault(x => x == this);
                 if (Loading != null)
                 {
                     if (Loading.Navigation.ModalStack.Count > 0)
@@ -59,7 +59,11 @@ namespace Innovation.Mobile.App.Views.Widget
 
         protected override bool OnBackButtonPressed()
         {
-            return !IsCloseLoading;
+            if (IsCloseLoading == true)
+            {
+                Hide();
+            }
+            return true;
         }
     }
 }
